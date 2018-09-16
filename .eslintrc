@@ -1,0 +1,28 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "import/prefer-default-export": 0,
+    "react/button-has-type": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-for": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["app/javascript"]
+      }
+    }
+  },
+  "globals": {
+    "localStorage": true,
+    "sessionStorage": true,
+    "window": true,
+    "document": true
+  }
+}
