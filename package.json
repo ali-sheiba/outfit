@@ -25,7 +25,8 @@
     "redux-form": "^7.4.2",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^5.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "tabler-ui": "^0.0.32"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

@@ -14,10 +14,6 @@ PreCommit:
   TrailingWhitespace:
     enabled: true
 
-PrePush:
-  RSpec:
-    enabled: true
-
 CommitMsg:
   SpellCheck:
     enabled: true
