@@ -2,7 +2,7 @@ import axios from 'axios';
 import Session from './session';
 
 // our "constructor"
-const Api = (baseURL = 'http://localhost:3000/v1/') => {
+const Api = (baseURL = '/v1/') => {
   // ------
   // STEP 1
   // ------

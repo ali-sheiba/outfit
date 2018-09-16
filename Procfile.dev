@@ -1,0 +1,2 @@
+api: bin/rails server -p 3000
+web: bin/webpack-dev-server

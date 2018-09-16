@@ -2,15 +2,11 @@ import React, { Fragment } from 'react';
 // import { Switch, Route, Redirect } from 'react-router-dom';
 import { NotificationContainer } from 'react-notifications';
 
-import Navbar from '../components/Navbar';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Navbar from 'components/Navbar';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
-import Session from '../utils/session';
 // import PrivateRoute from '../components/PrivateRoute';
-
-
-window.Session = Session;
 
 const App = () => (
   <Fragment>
