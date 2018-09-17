@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 // import { Switch, Route, Redirect } from 'react-router-dom';
-import { NotificationContainer } from 'react-notifications';
 
 import Navbar from 'components/Navbar';
 import Header from 'components/Header';
@@ -11,7 +10,6 @@ import Footer from 'components/Footer';
 const App = () => (
   <Fragment>
     <div className="page-main">
-      <NotificationContainer />
       <Header />
       <Navbar />
       <div className="my-3 my-md-5">

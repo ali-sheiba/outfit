@@ -38,6 +38,7 @@ const Api = (baseURL = '/v1/') => {
   // way at this level.
   //
   const login = params => api.post('/auth/login', params);
+  const register = params => api.post('/auth/register', params);
 
   // ------
   // STEP 3
@@ -54,6 +55,7 @@ const Api = (baseURL = '/v1/') => {
   return {
     // a list of the API functions from step 2
     login,
+    register,
   };
 };
 

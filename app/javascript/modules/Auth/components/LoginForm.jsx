@@ -15,20 +15,18 @@ const Form = ({ error, handleSubmit, submitting }) => (
         Login to your account
       </div>
 
-      <div className="form-group">
-        <label htmlFor="user_email" className="form-label">Email</label>
-        <Field
-          autoFocus
-          placeholder="Email"
-          className="form-control"
-          tabIndex="1"
-          type="email"
-          name="user[email]"
-          id="user_email"
-          component={TextInput}
-          validate={[required, email]}
-        />
-      </div>
+      <Field
+        label="Email"
+        autoFocus
+        placeholder="Email"
+        className="form-control"
+        tabIndex="1"
+        type="email"
+        name="user[email]"
+        id="user_email"
+        component={TextInput}
+        validate={[required, email]}
+      />
 
       <div className="form-group">
         <label className="form-label">

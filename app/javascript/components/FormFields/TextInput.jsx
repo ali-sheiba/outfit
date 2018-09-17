@@ -31,7 +31,7 @@ const TextInput = (field) => {
   return (field.label
     ? (
       <FormGroup>
-        <Label for={field.name} className="form-label">{field.label}</Label>
+        <Label for={field.id || field.input.name} className="form-label">{field.label}</Label>
         {input()}
       </FormGroup>
     )
