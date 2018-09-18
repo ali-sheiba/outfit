@@ -30,6 +30,9 @@ class Category < ApplicationRecord
   }
 
   ## -------------------- Associations -------------------- ##
+
+  has_many :items, dependent: :destroy
+
   ## -------------------- Validations --------------------- ##
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }

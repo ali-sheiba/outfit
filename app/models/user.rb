@@ -38,6 +38,9 @@ class User < ApplicationRecord
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   ## -------------------- Associations -------------------- ##
+
+  has_many :items, dependent: :destroy
+
   ## -------------------- Validations --------------------- ##
 
   validates :first_name,    presence: true

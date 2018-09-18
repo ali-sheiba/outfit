@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_174126) do
+ActiveRecord::Schema.define(version: 2018_09_17_191205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,21 @@ ActiveRecord::Schema.define(version: 2018_09_17_174126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index "lower((name)::text)", name: "index_colors_on_LOWER_name", unique: true
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "category_id", null: false
+    t.bigint "brand_id", null: false
+    t.bigint "color_id", null: false
+    t.string "name", null: false
+    t.decimal "price", precision: 5, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["brand_id"], name: "index_items_on_brand_id"
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["color_id"], name: "index_items_on_color_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,5 +79,9 @@ ActiveRecord::Schema.define(version: 2018_09_17_174126) do
     t.index ["user_id"], name: "index_whitelisted_jwts_on_user_id"
   end
 
+  add_foreign_key "items", "brands", on_delete: :cascade
+  add_foreign_key "items", "categories", on_delete: :cascade
+  add_foreign_key "items", "colors", on_delete: :cascade
+  add_foreign_key "items", "users", on_delete: :cascade
   add_foreign_key "whitelisted_jwts", "users", on_delete: :cascade
 end
