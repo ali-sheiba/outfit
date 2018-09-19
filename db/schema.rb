@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_17_191205) do
+ActiveRecord::Schema.define(version: 2018_09_19_064440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,25 @@ ActiveRecord::Schema.define(version: 2018_09_17_191205) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "outfit_items", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.bigint "outfit_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id", "outfit_id"], name: "index_outfit_items_on_item_id_and_outfit_id", unique: true
+    t.index ["item_id"], name: "index_outfit_items_on_item_id"
+    t.index ["outfit_id"], name: "index_outfit_items_on_outfit_id"
+  end
+
+  create_table "outfits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_outfits_on_name"
+    t.index ["user_id"], name: "index_outfits_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -83,5 +102,8 @@ ActiveRecord::Schema.define(version: 2018_09_17_191205) do
   add_foreign_key "items", "categories", on_delete: :cascade
   add_foreign_key "items", "colors", on_delete: :cascade
   add_foreign_key "items", "users", on_delete: :cascade
+  add_foreign_key "outfit_items", "items", on_delete: :cascade
+  add_foreign_key "outfit_items", "outfits", on_delete: :cascade
+  add_foreign_key "outfits", "users", on_delete: :cascade
   add_foreign_key "whitelisted_jwts", "users", on_delete: :cascade
 end

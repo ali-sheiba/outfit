@@ -41,6 +41,9 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :brand
 
+  has_many :outfit_items, dependent: :destroy
+  has_many :outfits,      through: :outfit_items, source: :outfit
+
   ## -------------------- Validations --------------------- ##
 
   validates :name, presence: true
@@ -53,6 +56,6 @@ class Item < ApplicationRecord
   ## ---------------------- Methods ----------------------- ##
 
   def max_items_per_user
-    errors.add(:base, 'Max 10 items per user') if user.items.count >= 10
+    errors.add(:base, 'Max 10 items per user') if Item.where(user_id: user_id).count >= 10
   end
 end

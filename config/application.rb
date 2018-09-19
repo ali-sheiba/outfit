@@ -19,7 +19,7 @@ require 'action_cable/engine'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Outfit
+module OutfitApp
   class Application < Rails::Application
     config.middleware.use Rack::Attack
 
