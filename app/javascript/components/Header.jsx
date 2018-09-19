@@ -1,28 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import {
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
 } from 'reactstrap';
-import Session from '../utils/session';
 
-const Header = () => (
+const Header = ({ isLogin = false, profile = {} }) => (
   <div className="header py-4">
     <div className="container">
       <div className="d-flex">
         <Link className="header-brand" to="/">
           Out
-          <span className="text-info">Fit</span>
+          <span className="text-info">fit</span>
         </Link>
 
-        {Session.isLogin()
+        {isLogin
           ? (
             <div className="d-flex order-lg-2 ml-auto">
               <UncontrolledDropdown tag="div">
                 <DropdownToggle nav className="pr-0 leading-none">
                   <span className="avatar" />
                   <span className="ml-2 d-none d-lg-block">
-                    <span className="text-default">{(Session.getUser() || {}).name}</span>
-                    <small className="text-muted d-block mt-1">{(Session.getUser() || {}).tag}</small>
+                    <span className="text-default">{profile.name}</span>
+                    <small className="text-muted d-block mt-1">{profile.tag}</small>
                   </span>
                 </DropdownToggle>
                 <DropdownMenu right className="dropdown-menu-arrow">
@@ -64,5 +64,10 @@ const Header = () => (
     </div>
   </div>
 );
+
+Header.propTypes = {
+  isLogin: PropTypes.bool.isRequired,
+  profile: PropTypes.shape(Object).isRequired,
+};
 
 export default withRouter(Header);

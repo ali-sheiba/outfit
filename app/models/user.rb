@@ -26,6 +26,7 @@
 class User < ApplicationRecord
   ## -------------------- Requirements -------------------- ##
 
+  include UserPresenter
   include Devise::JWT::RevocationStrategies::Whitelist
 
   # Include default devise modules. Others available are:

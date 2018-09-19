@@ -15,7 +15,7 @@ class V1::Auth::SessionsController < Devise::SessionsController
 
     render json: {
       message: find_message(:signed_in),
-      user: resource,
+      user: resource.as_api_response(:show),
       token: current_token
     }
   end

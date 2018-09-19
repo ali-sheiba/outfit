@@ -15,4 +15,10 @@ class Power
       false
     end
   end
+
+  ######################## V1::ProfilesController #######################
+
+  power :profile do
+    @current_user
+  end
 end

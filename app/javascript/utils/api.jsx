@@ -1,63 +1,32 @@
 import axios from 'axios';
-import Session from './session';
+import Session from 'utils/session';
 
-// our "constructor"
+// Inspired from
+// https://github.com/infinitered/ignite-ir-boilerplate-andross/blob/master/boilerplate/App/Services/Api.js
 const Api = (baseURL = '/v1/') => {
-  // ------
-  // STEP 1
-  // ------
-  //
-  // Create and configure an apisauce-based api object.
-  //
+  // define axios-base , and make it private by not return it
   const api = axios.create({
-    // base URL is read from the "constructor"
     baseURL,
-    // here are some default headers
     headers: {
       'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
       Accept: 'application/json',
       Authorization: Session.getBearerToken(),
     },
-    // 10 second timeout...
     timeout: 10000,
   });
 
-  // ------
-  // STEP 2
-  // ------
-  //
-  // Define some functions that call the api.  The goal is to provide
-  // a thin wrapper of the api layer providing nicer feeling functions
-  // rather than "get", "post" and friends.
-  //
-  // I generally don't like wrapping the output at this level because
-  // sometimes specific actions need to be take on `403` or `401`, etc.
-  //
-  // Since we can't hide from that, we embrace it by getting out of the
-  // way at this level.
-  //
-  const login = params => api.post('/auth/login', params);
-  const register = params => api.post('/auth/register', params);
-
-  // ------
-  // STEP 3
-  // ------
-  //
-  // Return back a collection of functions that we would consider our
-  // interface.  Most of the time it'll be just the list of all the
-  // methods in step 2.
-  //
-  // Notice we're not returning back the `api` created in step 1?  That's
-  // because it is scoped privately.  This is one way to create truly
-  // private scoped goodies in JavaScript.
-  //
+  // return only api calls
   return {
-    // a list of the API functions from step 2
-    login,
-    register,
+    // Session APIs
+    login: params => api.post('/auth/login', params),
+    register: params => api.post('/auth/register', params),
+    logout: params => api.delete('/auth/logout', params),
+
+    // Profile APIs
+    getProfile: params => api.get('/me', { params }),
+    updateProfile: params => api.put('/me', params),
   };
 };
 
-// let's return back our create method as the default.
 export default Api;

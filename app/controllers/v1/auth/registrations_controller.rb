@@ -19,14 +19,14 @@ class V1::Auth::RegistrationsController < Devise::RegistrationsController
         sign_up(resource_name, resource)
         render json: {
           message: find_message(:signed_up),
-          resource_name => resource,
+          resource_name => profile,
           token: current_token
         }
       else
         expire_data_after_sign_in!
         render json: {
           message: find_message("signed_up_but_#{resource.inactive_message}".to_sym),
-          resource_name => resource
+          resource_name => profile
         }
       end
     else
@@ -60,7 +60,11 @@ class V1::Auth::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def profile
+    resource.as_api_response(:show)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
