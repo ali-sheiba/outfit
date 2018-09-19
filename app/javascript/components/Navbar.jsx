@@ -3,10 +3,19 @@ import PropTypes from 'prop-types';
 import {
   Container, Row, Nav, NavItem, NavLink,
 } from 'reactstrap';
+import classNames from 'classnames';
 import { Link, withRouter } from 'react-router-dom';
 import startsWith from 'lodash/startsWith';
 
+
 class Navigation extends Component {
+  routes = [
+    { name: 'Home', link: '/', icon: 'fa-home' },
+    { name: 'Items', link: '/items', icon: 'fa-tshirt' },
+    { name: 'Outfits', link: '/outfits', icon: 'fa-user-astronaut' },
+    { name: 'Generator', link: '/generator', icon: 'fa-magic' },
+  ];
+
   isActive(link) {
     const { location } = this.props;
     return location.pathname === link || (link !== '/' && startsWith(location.pathname, link));
@@ -20,21 +29,14 @@ class Navigation extends Component {
 
             <div className="col-lg order-lg-first">
               <Nav tabs className="border-0 flex-column flex-lg-row">
-
-                <NavItem className="nav-item">
-                  <NavLink tag={Link} to="/" className="px-2" active={this.isActive('/')}>
-                    <i className="fas fa-home mr-2" />
-                    Home
-                  </NavLink>
-                </NavItem>
-
-                <NavItem className="nav-item">
-                  <NavLink tag={Link} to="/outfits" className="px-2" active={this.isActive('/projects')}>
-                    <i className="fas fa-cubes mr-2" />
-                    Outfits
-                  </NavLink>
-                </NavItem>
-
+                {this.routes.map(r => (
+                  <NavItem key={r.name} className="nav-item">
+                    <NavLink tag={Link} to={r.link} className="px-2" active={this.isActive(r.link)}>
+                      <i className={classNames('fas mr-2', r.icon)} />
+                      {r.name}
+                    </NavLink>
+                  </NavItem>
+                ))}
               </Nav>
             </div>
 

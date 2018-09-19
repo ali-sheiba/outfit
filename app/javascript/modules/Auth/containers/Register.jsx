@@ -1,33 +1,13 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { NotificationManager } from 'react-notifications';
-import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { SubmissionError } from 'redux-form';
-import Session from 'utils/session';
+import { Container, Row, Col } from 'reactstrap';
 import RegisterForm from 'modules/Auth/components/RegisterForm';
-import { register } from 'modules/Auth/actions';
+import SessionComponent from 'modules/Auth/components/SessionComponent';
+import { register, logout } from 'modules/Auth/actions';
 
-class Register extends Component {
-  componentDidMount() {
-    return Session.isLogin() && Session.clearAccessToken();
-  }
-
-  handleSubmit = (values) => {
-    const { registerAction, history } = this.props;
-    return registerAction(values).then(({ value }) => {
-      NotificationManager.success(value.data.message);
-      Session.setAccessToken(value.data.token);
-      history.push('/');
-    }).catch((err) => {
-      throw new SubmissionError({
-        ...err.response.data.data,
-        _error: err.response ? err.response.data.error : err.message,
-      });
-    });
-  }
-
+class Register extends SessionComponent {
   render() {
     return (
       <div className="my-3 my-md-5">
@@ -51,14 +31,15 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  registerAction: PropTypes.func.isRequired,
-  history: PropTypes.shape(Object).isRequired,
+  sessionAction: PropTypes.func.isRequired,
+  logoutAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = store => store.auth;
 
 const mapDispatchToProps = {
-  registerAction: register,
+  sessionAction: register,
+  logoutAction: logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -1,32 +1,13 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { NotificationManager } from 'react-notifications';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { SubmissionError } from 'redux-form';
-import Session from 'utils/session';
+import { Container, Row, Col } from 'reactstrap';
 import LoginForm from 'modules/Auth/components/LoginForm';
-import { login } from 'modules/Auth/actions';
+import SessionComponent from 'modules/Auth/components/SessionComponent';
+import { login, logout } from 'modules/Auth/actions';
 
-class Login extends Component {
-  componentDidMount() {
-    return Session.isLogin() && Session.clearAccessToken();
-  }
-
-  handleSubmit = (values) => {
-    const { loginAction, history } = this.props;
-    return loginAction(values).then(({ value }) => {
-      NotificationManager.success(value.data.message);
-      Session.setAccessToken(value.data.token);
-      history.push('/');
-    }).catch((err) => {
-      throw new SubmissionError({
-        _error: err.response ? err.response.data.error : err.message,
-      });
-    });
-  }
-
+class Login extends SessionComponent {
   render() {
     return (
       <div className="my-3 my-md-5">
@@ -50,14 +31,15 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  loginAction: PropTypes.func.isRequired,
-  history: PropTypes.shape(Object).isRequired,
+  sessionAction: PropTypes.func.isRequired,
+  logoutAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = store => store.auth;
 
 const mapDispatchToProps = {
-  loginAction: login,
+  sessionAction: login,
+  logoutAction: logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
