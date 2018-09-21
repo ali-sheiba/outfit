@@ -1,15 +1,23 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import DropdownList from 'react-widgets/lib/DropdownList';
 import classNames from 'classnames';
 
-const TextInput = ({ input, meta, ...field }) => {
+const DropdownListInput = ({
+  input, meta, data, ...field
+}) => {
   const inputField = () => (
     <Fragment>
-      <input
+      <DropdownList
+        filter
         id={field.id || input.name}
+        valueField="id"
+        textField="name"
         {...input}
         {...field}
-        className={classNames('form-control', input.className, {
+        data={data}
+        onChange={value => input.onChange(value.id)}
+        containerClassName={classNames('form-control', input.className, {
           'is-invalid': meta.touched && !meta.valid,
         })}
       />
@@ -40,9 +48,10 @@ const TextInput = ({ input, meta, ...field }) => {
 };
 
 
-TextInput.propTypes = {
-  input: PropTypes.objectOf(Object).isRequired,
-  meta: PropTypes.objectOf(Object).isRequired,
+DropdownListInput.propTypes = {
+  input: PropTypes.shape(Object).isRequired,
+  meta: PropTypes.shape(Object).isRequired,
+  data: PropTypes.shape(Array).isRequired,
 };
 
-export default TextInput;
+export default DropdownListInput;

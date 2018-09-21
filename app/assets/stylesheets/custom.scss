@@ -1,0 +1,16 @@
+.rw-widget-container {
+  border: 1px solid rgba(0, 40, 100, .12);
+  border-radius: 3px;
+}
+
+.rw-widget-input, .rw-filter-input {
+  box-shadow: none;
+}
+
+.rw-placeholder {
+  color: #adb5bd;
+}
+
+.rw-input, .rw-dropdown-list-autofill, .rw-filter-input {
+  padding: 0
+}

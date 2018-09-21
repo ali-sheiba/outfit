@@ -1,15 +1,18 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+
+import PrivateRoute from 'components/PrivateRoute';
+import Session from 'utils/session';
 
 import Navbar from 'components/Navbar';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import Session from 'utils/session';
+
 import { getProfile } from 'modules/Auth/actions';
 
-// import PrivateRoute from '../components/PrivateRoute';
+import index from 'modules/Items';
 
 class App extends Component {
   componentDidMount() {
@@ -28,7 +31,9 @@ class App extends Component {
           {isLogin && <Navbar />}
           <div className="my-3 my-md-5">
             <div className="container">
-              Hello
+              <Switch>
+                <PrivateRoute path="/items" component={index} isAuthenticated={isLogin || Session.isLogin()} />
+              </Switch>
             </div>
           </div>
         </div>

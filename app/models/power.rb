@@ -19,6 +19,13 @@ class Power
   ######################## V1::ProfilesController #######################
 
   power :profile do
-    @current_user
+    current_user
+  end
+
+  ######################## V1::ItemsController #######################
+
+  power :items do
+    current_user.items
+                .includes(:category, :brand, :color)
   end
 end

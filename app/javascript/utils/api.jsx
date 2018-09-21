@@ -26,6 +26,14 @@ const Api = (baseURL = '/v1/') => {
     // Profile APIs
     getProfile: params => api.get('/me', { params }),
     updateProfile: params => api.put('/me', params),
+
+    // Items APIs
+    getItems: params => api.get('/items', { params }),
+    getItemsOptions: params => api.get('/items/options', { params }),
+    createItem: params => api.post('/items', params),
+    getItem: (id, params) => api.get(`/items/${id}`, { params }),
+    updateItem: (id, params) => api.put(`/items/${id}`, params),
+    deleteItem: (id, params) => api.delete(`/items/${id}`, { params }),
   };
 };
 

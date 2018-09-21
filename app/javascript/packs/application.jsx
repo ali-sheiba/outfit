@@ -13,6 +13,8 @@ import 'tabler-ui/dist/assets/css/tabler.css';
 import 'tabler-ui/dist/assets/css/dashboard.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 import 'react-notifications/lib/notifications.css';
+import 'react-widgets/dist/css/react-widgets.css';
+import '../../assets/stylesheets/custom.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render((

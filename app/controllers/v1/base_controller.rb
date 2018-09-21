@@ -58,7 +58,7 @@ class V1::BaseController < V1::ApiController
   # DELETE : /v2/{resource}/:id
   def destroy
     if resource.destroy
-      render_success(message: destroyed_message)
+      render_success(message: destroyed_message, data: { id: resource.id })
     else
       render_unprocessable_entity(error: resource)
     end

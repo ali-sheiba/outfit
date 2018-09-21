@@ -16,6 +16,7 @@
 #
 
 class Category < ApplicationRecord
+  include CategoryPresenter
   ## -------------------- Requirements -------------------- ##
 
   extend Enumerize

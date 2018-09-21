@@ -30,6 +30,7 @@
 #
 
 class Item < ApplicationRecord
+  include ItemPresenter
   ## -------------------- Requirements -------------------- ##
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##

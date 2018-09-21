@@ -5,6 +5,8 @@ import { NotificationManager } from 'react-notifications';
 
 const formErrorCodes = [1010, 1301, 1307];
 
+export const errorMessage = err => (err.response ? err.response.data.error : err.message);
+
 export const errCatcher = (err, submissionError = true) => {
   if (err.response) {
     const {
