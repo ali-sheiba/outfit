@@ -23,6 +23,11 @@ Rails.application.routes.draw do
     end
 
     resources :outfits
+    resources :explores, only: %i[index show] do
+      member do
+        post :like
+      end
+    end
   end
 
   match '*unmatched_route', via: :get, to: 'pages#home', format: false

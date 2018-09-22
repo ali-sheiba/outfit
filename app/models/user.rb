@@ -42,6 +42,8 @@ class User < ApplicationRecord
 
   has_many :items,   dependent: :destroy
   has_many :outfits, dependent: :destroy
+  has_many :likes,   class_name: 'OutfitLike', dependent: :destroy
+  has_many :liked_outfits, through: :likes, source: :outfit
 
   ## -------------------- Validations --------------------- ##
 

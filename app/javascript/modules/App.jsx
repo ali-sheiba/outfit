@@ -14,6 +14,7 @@ import { getProfile } from 'modules/Auth/actions';
 
 import Items from 'modules/Items';
 import Outfits from 'modules/Outfits';
+import Explores from 'modules/Explores';
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends Component {
               <Switch>
                 <PrivateRoute path="/outfits" component={Outfits} isAuthenticated={isAuthenticated} />
                 <PrivateRoute path="/items" component={Items} isAuthenticated={isAuthenticated} />
+                <PrivateRoute path="/" component={Explores} isAuthenticated={isAuthenticated} />
               </Switch>
             </div>
           </div>

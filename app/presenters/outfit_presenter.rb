@@ -21,5 +21,13 @@ module OutfitPresenter
       t.add :created_at
       t.add :updated_at
     end
+
+    api_accessible :explore, extend: :index do |t|
+      t.remove :item_ids
+      t.add :created_at
+      t.add :user,          template: :base
+      t.add :likes_counter, as: :likes
+      t.add ->(outfit, options) { options[:liked_outfit_ids].include?(outfit.id) }, as: :liked
+    end
   end
 end

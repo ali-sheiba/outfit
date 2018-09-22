@@ -4,11 +4,13 @@
 #
 # Table name: outfits
 #
-#  id         :bigint(8)        not null, primary key
-#  name       :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint(8)        not null
+#  id            :bigint(8)        not null, primary key
+#  likes_counter :integer          default(0), not null
+#  name          :string           not null
+#  total_price   :decimal(5, 2)    default(0.0), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :bigint(8)        not null
 #
 # Indexes
 #

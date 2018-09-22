@@ -35,4 +35,11 @@ class Power
     current_user.outfits
                 .includes(items: %i[category brand color])
   end
+
+  ######################## V1::ExploresController #######################
+
+  power :explores do
+    Outfit.includes(:user, items: %i[category brand color])
+          .where.not(user_id: current_user.id)
+  end
 end

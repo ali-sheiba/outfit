@@ -42,6 +42,11 @@ const Api = (baseURL = '/v1/') => {
     getOutfit: (id, params) => api.get(`/outfits/${id}`, { params }),
     updateOutfit: (id, params) => api.put(`/outfits/${id}`, params),
     deleteOutfit: (id, params) => api.delete(`/outfits/${id}`, { params }),
+
+    // Explore APIs
+    exploreOutfits: params => api.get('/explores', { params }),
+    exploreOutfit: (id, params) => api.get(`/explores/${id}`, { params }),
+    likeOutfit: (id, params) => api.post(`/explores/${id}/like`, { params }),
   };
 };
 
