@@ -37,12 +37,12 @@ class Edit extends Component {
 
   render() {
     const {
-      outfits: { fetching },
-      items: { items, fetching: fetchingItems },
+      outfits: { fetching, error },
+      items: { items, fetching: fetchingItems, error: iError },
     } = this.props;
 
     return (
-      <ContentDimmer active={fetching || fetchingItems}>
+      <ContentDimmer active={fetching || fetchingItems} error={error || iError}>
         <div className="page-header">
           <h1 className="page-title">
             Update Outfits

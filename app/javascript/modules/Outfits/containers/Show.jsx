@@ -14,9 +14,9 @@ class Index extends Component {
   }
 
   render() {
-    const { fetching, outfit } = this.props;
+    const { fetching, outfit, error } = this.props;
     return (
-      <ContentDimmer active={fetching}>
+      <ContentDimmer active={fetching} error={error}>
         <div className="page-header">
           <h1 className="page-title">
             {outfit.name}
@@ -53,6 +53,7 @@ Index.propTypes = {
   fetching: PropTypes.bool.isRequired,
   outfit: PropTypes.shape(Object).isRequired,
   match: PropTypes.shape(Object).isRequired,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 const mapStateToProps = store => store.outfits;

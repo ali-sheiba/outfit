@@ -34,7 +34,7 @@ class Index extends Component {
 
   render() {
     const {
-      fetching, count, items, deletingId,
+      fetching, count, items, deletingId, error,
     } = this.props;
     return (
       <Fragment>
@@ -43,7 +43,7 @@ class Index extends Component {
             Items
           </h1>
         </div>
-        <ContentDimmer active={fetching}>
+        <ContentDimmer active={fetching} error={error}>
           {count === 0
             ? this.renderEmpty()
             : (
@@ -77,6 +77,7 @@ Index.propTypes = {
   count: PropTypes.number.isRequired,
   items: PropTypes.arrayOf(Object).isRequired,
   deletingId: PropTypes.number,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 const mapStateToProps = store => store.items;

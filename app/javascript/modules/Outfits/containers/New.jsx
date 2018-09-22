@@ -24,11 +24,11 @@ class New extends Component {
 
   render() {
     const {
-      items: { items, fetching },
+      items: { items, fetching, error },
     } = this.props;
 
     return (
-      <ContentDimmer active={fetching}>
+      <ContentDimmer active={fetching} error={error}>
         <div className="page-header">
           <h1 className="page-title">
             Create Outfits

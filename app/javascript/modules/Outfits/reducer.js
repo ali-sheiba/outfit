@@ -22,6 +22,7 @@ const reducer = (state = initalState, { type, payload, meta }) => {
       return {
         ...state,
         fetching: true,
+        error: false,
       };
     case 'FETCH_OUTFITS_FULFILLED':
       return {
