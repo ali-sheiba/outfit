@@ -1,3 +1,5 @@
+/* eslint no-alert: 0 */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import HTML5Backend from 'react-dnd-html5-backend';

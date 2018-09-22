@@ -8,7 +8,7 @@ import { fetchItemsIfNeeded } from 'modules/Items/actions';
 import { createOutfit } from '../actions';
 import Form from '../components/Form';
 
-class Index extends Component {
+class New extends Component {
   componentDidMount() {
     const { getItems } = this.props;
     getItems();
@@ -40,7 +40,7 @@ class Index extends Component {
   }
 }
 
-Index.propTypes = {
+New.propTypes = {
   getItems: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   items: PropTypes.shape(Object).isRequired,
@@ -57,4 +57,4 @@ const mapDispatchToProps = {
   submit: createOutfit,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default connect(mapStateToProps, mapDispatchToProps)(New);

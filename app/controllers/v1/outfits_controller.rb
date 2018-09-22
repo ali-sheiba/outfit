@@ -45,7 +45,7 @@ class V1::OutfitsController < V1::BaseController
   # Whitelist parameters
   def outfit_params
     params.require(:outfit)
-          .permit(:name)
+          .permit(action_name == 'create' ? [:name] : [:name, item_ids: []])
   end
 
   def outfit_items_params

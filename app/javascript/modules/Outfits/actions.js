@@ -32,8 +32,8 @@ export const fetchOptions = params => dispatch => dispatch({
 });
 
 export const fetchOutfitsIfNeeded = params => (dispatch, getState) => {
-  const { outfits } = getState().outfits;
-  if (outfits.length === 0) {
+  const { fetched } = getState().outfits;
+  if (!fetched) {
     return dispatch(fetchOutfits(params));
   }
   return null;

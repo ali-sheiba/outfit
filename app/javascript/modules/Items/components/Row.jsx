@@ -6,6 +6,7 @@ const Row = ({ item, handleDelete, deletingId }) => (
     <div className="card">
       <div className="card-header">
         <h3 className="card-title">{item.name}</h3>
+        {handleDelete && (
         <div className="card-options">
           {/* <button type="button" className="btn btn-link text-lime btn-sm">
               <i className="fas fa-edit" />
@@ -18,6 +19,7 @@ const Row = ({ item, handleDelete, deletingId }) => (
               </button>
             )}
         </div>
+        )}
       </div>
       <div className="card-body">
         <p className="card-text m-0">
@@ -44,8 +46,8 @@ const Row = ({ item, handleDelete, deletingId }) => (
 );
 
 Row.propTypes = {
-  handleDelete: PropTypes.func.isRequired,
   item: PropTypes.shape(Object).isRequired,
+  handleDelete: PropTypes.func,
   deletingId: PropTypes.number,
 };
 

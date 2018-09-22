@@ -2,6 +2,7 @@ import { errorMessage } from 'utils/errors';
 
 const initalState = {
   fetching: false,
+  fetched: false, // indicate if index already fitched or need refresh
   error: false,
   message: null,
   outfit: {},
@@ -14,7 +15,9 @@ const initalState = {
 const reducer = (state = initalState, { type, payload, meta }) => {
   switch (type) {
     case 'FETCH_OUTFITS_PENDING':
+    case 'FETCH_OUTFIT_PENDING':
     case 'CREATE_OUTFIT_PENDING':
+    case 'UPDATE_OUTFIT_PENDING':
     case 'FETCH_OUTFITS_OPTIONS_PENDING':
       return {
         ...state,
@@ -24,12 +27,15 @@ const reducer = (state = initalState, { type, payload, meta }) => {
       return {
         ...state,
         fetching: false,
+        fetched: true,
         outfits: payload.data.outfits,
         count: payload.data.pagination.total_entries,
       };
     case 'FETCH_OUTFITS_REJECTED':
+    case 'FETCH_OUTFIT_REJECTED':
     case 'DELETE_OUTFIT_REJECTED':
     case 'CREATE_OUTFIT_REJECTED':
+    case 'UPDATE_OUTFIT_REJECTED':
     case 'FETCH_OUTFITS_OPTIONS_REJECTED':
       return {
         ...state,
@@ -57,6 +63,19 @@ const reducer = (state = initalState, { type, payload, meta }) => {
         fetching: false,
         outfits: state.outfits.concat(payload.data.outfit),
         count: state.count + 1,
+      };
+    case 'FETCH_OUTFIT_FULFILLED':
+      return {
+        ...state,
+        fetching: false,
+        outfit: payload.data.outfit,
+      };
+    case 'UPDATE_OUTFIT_FULFILLED':
+      return {
+        ...state,
+        fetching: false,
+        fetched: false, // force index to be relaoded
+        outfit: payload.data.outfit,
       };
     case 'DELETE_OUTFIT_FULFILLED':
       return {

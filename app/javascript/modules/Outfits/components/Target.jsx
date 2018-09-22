@@ -21,8 +21,6 @@ class Target extends Component {
         <button className="float-right btn btn-link p-0 btn-sm" onClick={() => handleRemove(item.id)}>
           <i className="fas fa-times text-danger pointer" />
         </button>
-        {item.id}
-        -
         {item.name}
         <span className="float-right text-muted mr-2">{item.price}</span>
       </div>
