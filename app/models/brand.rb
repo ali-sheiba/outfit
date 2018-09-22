@@ -15,8 +15,10 @@
 #
 
 class Brand < ApplicationRecord
-  include BrandPresenter
   ## -------------------- Requirements -------------------- ##
+
+  include BrandPresenter
+
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##

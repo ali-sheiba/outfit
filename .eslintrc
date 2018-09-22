@@ -21,6 +21,7 @@
     }
   },
   "globals": {
+    "alert": true,
     "localStorage": true,
     "sessionStorage": true,
     "window": true,

@@ -22,19 +22,9 @@ const Header = ({ isLogin = false, profile = {} }) => (
                   <span className="avatar" />
                   <span className="ml-2 d-none d-lg-block">
                     <span className="text-default">{profile.name}</span>
-                    <small className="text-muted d-block mt-1">{profile.tag}</small>
                   </span>
                 </DropdownToggle>
                 <DropdownMenu right className="dropdown-menu-arrow">
-                  <DropdownItem>
-                    <i className="dropdown-icon fe fe-user" />
-                    Profile
-                  </DropdownItem>
-                  <DropdownItem>
-                    <i className="dropdown-icon fe fe-settings" />
-                    Settings
-                  </DropdownItem>
-                  <DropdownItem divider />
                   <DropdownItem tag={Link} to="/login">
                     <i className="dropdown-icon fe fe-log-out" />
                     Sign out

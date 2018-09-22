@@ -11,9 +11,10 @@ import startsWith from 'lodash/startsWith';
 class Navigation extends Component {
   routes = [
     { name: 'Home', link: '/', icon: 'fa-home' },
-    { name: 'Items', link: '/items', icon: 'fa-tshirt' },
-    { name: 'Outfits', link: '/outfits', icon: 'fa-user-astronaut' },
-    { name: 'Generator', link: '/generator', icon: 'fa-magic' },
+    { name: 'Explore', link: '/explore', icon: 'fa-compass' },
+    { name: 'My Items', link: '/items', icon: 'fa-tshirt' },
+    { name: 'My Outfits', link: '/outfits', icon: 'fa-user-astronaut' },
+    { name: 'Recommendations', link: '/generator', icon: 'fa-magic' },
   ];
 
   isActive(link) {

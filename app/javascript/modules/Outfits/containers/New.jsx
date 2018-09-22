@@ -4,53 +4,57 @@ import { connect } from 'react-redux';
 import { NotificationManager } from 'react-notifications';
 import ContentDimmer from 'components/ContentDimmer';
 import { errCatcher } from 'utils/errors';
-import { fetchOptions, createItem } from '../actions';
+import { fetchItemsIfNeeded } from 'modules/Items/actions';
+import { createOutfit } from '../actions';
 import Form from '../components/Form';
 
 class Index extends Component {
   componentDidMount() {
-    const { getOptions } = this.props;
-    getOptions();
+    const { getItems } = this.props;
+    getItems();
   }
 
   handleSubmit = (values) => {
     const { submit, history } = this.props;
     return submit(values).then(({ value }) => {
       NotificationManager.success(value.data.message);
-      history.push('/items');
+      history.push('/outfits');
     }).catch(err => errCatcher(err));
   };
 
   render() {
-    const { fetching, options } = this.props;
+    const {
+      items: { items, fetching },
+    } = this.props;
+
     return (
       <ContentDimmer active={fetching}>
         <div className="page-header">
           <h1 className="page-title">
-            New Item
+            Create Outfits
           </h1>
         </div>
-        <div className="row">
-          { !fetching && <Form onSubmit={this.handleSubmit} options={options} />}
-        </div>
+        { !fetching && <Form onSubmit={this.handleSubmit} items={items} />}
       </ContentDimmer>
     );
   }
 }
 
 Index.propTypes = {
-  getOptions: PropTypes.func.isRequired,
+  getItems: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  options: PropTypes.shape(Object).isRequired,
+  items: PropTypes.shape(Object).isRequired,
   history: PropTypes.shape(Object).isRequired,
 };
 
-const mapStateToProps = store => store.items;
+const mapStateToProps = store => ({
+  outfits: store.outfits,
+  items: store.items,
+});
 
 const mapDispatchToProps = {
-  getOptions: fetchOptions,
-  submit: createItem,
+  getItems: fetchItemsIfNeeded,
+  submit: createOutfit,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

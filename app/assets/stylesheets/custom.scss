@@ -14,3 +14,12 @@
 .rw-input, .rw-dropdown-list-autofill, .rw-filter-input {
   padding: 0
 }
+
+.pointer {
+  cursor: pointer;
+}
+
+.my-items-box {
+  max-height: 400px;
+  overflow-y: scroll;
+}

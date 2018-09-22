@@ -4,8 +4,8 @@ const initalState = {
   fetching: false,
   error: false,
   message: null,
-  item: {},
-  items: [],
+  <%= resource_name.downcase %>: {},
+  <%= resource_names.downcase %>: [],
   count: 0,
   options: {},
   deletingId: null,
@@ -13,30 +13,28 @@ const initalState = {
 
 const reducer = (state = initalState, { type, payload, meta }) => {
   switch (type) {
-    case 'FETCH_ITEMS_PENDING':
-    case 'CREATE_ITEMS_PENDING':
-    case 'FETCH_ITEMS_OPTIONS_PENDING':
+    case 'FETCH_<%= redux_actions %>_PENDING':
+    case 'FETCH_<%= redux_actions %>_OPTIONS_PENDING':
       return {
         ...state,
         fetching: true,
       };
-    case 'FETCH_ITEMS_FULFILLED':
+    case 'FETCH_<%= redux_actions %>_FULFILLED':
       return {
         ...state,
         fetching: false,
-        items: payload.data.items,
+        <%= resource_names.downcase %>: payload.data.<%= resource_names.downcase %>,
         count: payload.data.pagination.total_entries,
       };
-    case 'FETCH_ITEMS_REJECTED':
-    case 'DELETE_ITEM_REJECTED':
-    case 'CREATE_ITEM_REJECTED':
-    case 'FETCH_ITEMS_OPTIONS_REJECTED':
+    case 'FETCH_<%= redux_actions %>_REJECTED':
+    case 'DELETE_<%= redux_action %>_REJECTED':
+    case 'FETCH_<%= redux_actions %>_OPTIONS_REJECTED':
       return {
         ...state,
         fetching: false,
         error: errorMessage(payload),
       };
-    case 'FETCH_ITEMS_OPTIONS_FULFILLED':
+    case 'FETCH_<%= redux_actions %>_OPTIONS_FULFILLED':
       return {
         ...state,
         fetching: false,
@@ -46,22 +44,15 @@ const reducer = (state = initalState, { type, payload, meta }) => {
           categories: payload.data.categories,
         },
       };
-    case 'CREATE_ITEM_FULFILLED':
-      return {
-        ...state,
-        fetching: false,
-        items: state.items.concat(payload.data.item),
-        count: state.count + 1,
-      };
-    case 'DELETE_ITEM_PENDING':
+    case 'DELETE_<%= redux_action %>_PENDING':
       return {
         ...state,
         deletingId: meta.id,
       };
-    case 'DELETE_ITEM_FULFILLED':
+    case 'DELETE_<%= redux_action %>_FULFILLED':
       return {
         ...state,
-        items: state.items.filter(i => i.id !== payload.data.id),
+        <%= resource_names.downcase %>: state.<%= resource_names.downcase %>.filter(i => i.id !== payload.data.id),
         count: state.count - 1,
         deletingId: null,
       };

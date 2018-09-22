@@ -1,0 +1,40 @@
+import Api from 'utils/api';
+
+export const fetch<%= resource_names %> = params => dispatch => dispatch({
+  type: 'FETCH_<%= redux_actions %>',
+  payload: Api().get<%= resource_names %>(params),
+});
+
+export const fetch<%= resource_name %> = (id, params) => dispatch => dispatch({
+  type: 'FETCH_<%= redux_action %>',
+  payload: Api().get<%= resource_name %>(id, params),
+});
+
+export const update<%= resource_name %> = (id, params) => dispatch => dispatch({
+  type: 'UPDATE_<%= redux_action %>',
+  payload: Api().update<%= resource_name %>(id, params),
+});
+
+export const create<%= resource_name %> = params => dispatch => dispatch({
+  type: 'CREATE_<%= redux_action %>',
+  payload: Api().create<%= resource_name %>(params),
+});
+
+export const delete<%= resource_name %> = (id, params) => dispatch => dispatch({
+  type: 'DELETE_<%= redux_action %>',
+  payload: Api().delete<%= resource_name %>(id, params),
+  meta: { id },
+});
+
+export const fetchOptions = params => dispatch => dispatch({
+  type: 'FETCH_<%= redux_actions %>_OPTIONS',
+  payload: Api().get<%= resource_names %>Options(params),
+});
+
+export const fetch<%= resource_names %>IfNeeded = params => (dispatch, getState) => {
+  const { <%= resource_names.downcase %> } = getState().<%= resource_names.downcase %>;
+  if (<%= resource_names.downcase %>.length === 0) {
+    return dispatch(fetch<%= resource_names %>(params));
+  }
+  return null;
+};

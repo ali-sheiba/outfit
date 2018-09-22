@@ -16,10 +16,10 @@
 #
 
 class Category < ApplicationRecord
-  include CategoryPresenter
   ## -------------------- Requirements -------------------- ##
 
   extend Enumerize
+  include CategoryPresenter
 
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##

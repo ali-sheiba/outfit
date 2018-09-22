@@ -40,7 +40,8 @@ class User < ApplicationRecord
   ## ----------------------- Enums ------------------------ ##
   ## -------------------- Associations -------------------- ##
 
-  has_many :items, dependent: :destroy
+  has_many :items,   dependent: :destroy
+  has_many :outfits, dependent: :destroy
 
   ## -------------------- Validations --------------------- ##
 

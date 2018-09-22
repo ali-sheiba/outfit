@@ -33,7 +33,7 @@ class V1::BaseController < V1::ApiController
     find_resource(scope.new(params_processed))
     if resource.save
       data = { show_key => resource.as_api_response(show_template, template_injector) }
-      # yield data if block_given?
+      yield data, resource if block_given?
       render_created(data: data, message: created_message)
     else
       render_unprocessable_entity(error: resource)

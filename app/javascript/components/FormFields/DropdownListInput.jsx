@@ -4,7 +4,7 @@ import DropdownList from 'react-widgets/lib/DropdownList';
 import classNames from 'classnames';
 
 const DropdownListInput = ({
-  input, meta, data, ...field
+  input, meta, data = [], ...field
 }) => {
   const inputField = () => (
     <Fragment>
@@ -51,7 +51,7 @@ const DropdownListInput = ({
 DropdownListInput.propTypes = {
   input: PropTypes.shape(Object).isRequired,
   meta: PropTypes.shape(Object).isRequired,
-  data: PropTypes.shape(Array).isRequired,
+  data: PropTypes.arrayOf(Object),
 };
 
 export default DropdownListInput;

@@ -12,7 +12,8 @@ import Footer from 'components/Footer';
 
 import { getProfile } from 'modules/Auth/actions';
 
-import index from 'modules/Items';
+import Items from 'modules/Items';
+import Outfits from 'modules/Outfits';
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class App extends Component {
 
   render() {
     const { isLogin, profile } = this.props;
+    const isAuthenticated = isLogin || Session.isLogin();
     return (
       <Fragment>
         <div className="page-main">
@@ -32,7 +34,8 @@ class App extends Component {
           <div className="my-3 my-md-5">
             <div className="container">
               <Switch>
-                <PrivateRoute path="/items" component={index} isAuthenticated={isLogin || Session.isLogin()} />
+                <PrivateRoute path="/outfits" component={Outfits} isAuthenticated={isAuthenticated} />
+                <PrivateRoute path="/items" component={Items} isAuthenticated={isAuthenticated} />
               </Switch>
             </div>
           </div>

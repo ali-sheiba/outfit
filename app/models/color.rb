@@ -15,8 +15,10 @@
 #
 
 class Color < ApplicationRecord
-  include ColorPresenter
   ## -------------------- Requirements -------------------- ##
+
+  include ColorPresenter
+
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##

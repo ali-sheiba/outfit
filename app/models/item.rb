@@ -30,8 +30,10 @@
 #
 
 class Item < ApplicationRecord
-  include ItemPresenter
   ## -------------------- Requirements -------------------- ##
+
+  include ItemPresenter
+
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
@@ -50,13 +52,7 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
-  validate :max_items_per_user
-
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
-
-  def max_items_per_user
-    errors.add(:base, 'Max 10 items per user') if Item.where(user_id: user_id).count >= 10
-  end
 end

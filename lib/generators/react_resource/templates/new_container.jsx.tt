@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { NotificationManager } from 'react-notifications';
 import ContentDimmer from 'components/ContentDimmer';
 import { errCatcher } from 'utils/errors';
-import { fetchOptions, createItem } from '../actions';
+import { fetchOptions, create<%= resource_name %> } from '../actions';
 import Form from '../components/Form';
 
 class Index extends Component {
@@ -17,7 +17,7 @@ class Index extends Component {
     const { submit, history } = this.props;
     return submit(values).then(({ value }) => {
       NotificationManager.success(value.data.message);
-      history.push('/items');
+      history.push('/<%= resource_names.downcase %>');
     }).catch(err => errCatcher(err));
   };
 
@@ -25,11 +25,6 @@ class Index extends Component {
     const { fetching, options } = this.props;
     return (
       <ContentDimmer active={fetching}>
-        <div className="page-header">
-          <h1 className="page-title">
-            New Item
-          </h1>
-        </div>
         <div className="row">
           { !fetching && <Form onSubmit={this.handleSubmit} options={options} />}
         </div>
@@ -46,11 +41,11 @@ Index.propTypes = {
   history: PropTypes.shape(Object).isRequired,
 };
 
-const mapStateToProps = store => store.items;
+const mapStateToProps = store => store.<%= resource_names.downcase %>;
 
 const mapDispatchToProps = {
   getOptions: fetchOptions,
-  submit: createItem,
+  submit: create<%= resource_name %>,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

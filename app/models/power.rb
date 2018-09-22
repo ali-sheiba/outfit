@@ -28,4 +28,11 @@ class Power
     current_user.items
                 .includes(:category, :brand, :color)
   end
+
+  ######################## V1::OutfitsController #######################
+
+  power :outfits do
+    current_user.outfits
+                .includes(items: %i[category brand color])
+  end
 end

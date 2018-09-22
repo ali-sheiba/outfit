@@ -19,8 +19,8 @@ const Api = (baseURL = '/v1/') => {
   // return only api calls
   return {
     // Session APIs
-    login: params => api.post('/auth/login', params),
-    register: params => api.post('/auth/register', params),
+    login: params => api.post('/auth/login', params, { headers: { Authorization: null } }),
+    register: params => api.post('/auth/register', params, { headers: { Authorization: null } }),
     logout: params => api.delete('/auth/logout', params),
 
     // Profile APIs
@@ -34,6 +34,14 @@ const Api = (baseURL = '/v1/') => {
     getItem: (id, params) => api.get(`/items/${id}`, { params }),
     updateItem: (id, params) => api.put(`/items/${id}`, params),
     deleteItem: (id, params) => api.delete(`/items/${id}`, { params }),
+
+    // Outfits APIs
+    getOutfits: params => api.get('/outfits', { params }),
+    getOutfitsOptions: params => api.get('/outfits/options', { params }),
+    createOutfit: params => api.post('/outfits', params),
+    getOutfit: (id, params) => api.get(`/outfits/${id}`, { params }),
+    updateOutfit: (id, params) => api.put(`/outfits/${id}`, params),
+    deleteOutfit: (id, params) => api.delete(`/outfits/${id}`, { params }),
   };
 };
 

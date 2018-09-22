@@ -67,7 +67,7 @@ const Form = ({
     </div>
     )}
 
-    <div className="card-footer">
+    <div className="card-footer text-center">
       <Button color="primary" disabled={submitting}>Submit</Button>
     </div>
   </form>

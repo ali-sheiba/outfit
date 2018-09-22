@@ -4,8 +4,8 @@ const initalState = {
   fetching: false,
   error: false,
   message: null,
-  item: {},
-  items: [],
+  outfit: {},
+  outfits: [],
   count: 0,
   options: {},
   deletingId: null,
@@ -13,30 +13,30 @@ const initalState = {
 
 const reducer = (state = initalState, { type, payload, meta }) => {
   switch (type) {
-    case 'FETCH_ITEMS_PENDING':
-    case 'CREATE_ITEMS_PENDING':
-    case 'FETCH_ITEMS_OPTIONS_PENDING':
+    case 'FETCH_OUTFITS_PENDING':
+    case 'CREATE_OUTFIT_PENDING':
+    case 'FETCH_OUTFITS_OPTIONS_PENDING':
       return {
         ...state,
         fetching: true,
       };
-    case 'FETCH_ITEMS_FULFILLED':
+    case 'FETCH_OUTFITS_FULFILLED':
       return {
         ...state,
         fetching: false,
-        items: payload.data.items,
+        outfits: payload.data.outfits,
         count: payload.data.pagination.total_entries,
       };
-    case 'FETCH_ITEMS_REJECTED':
-    case 'DELETE_ITEM_REJECTED':
-    case 'CREATE_ITEM_REJECTED':
-    case 'FETCH_ITEMS_OPTIONS_REJECTED':
+    case 'FETCH_OUTFITS_REJECTED':
+    case 'DELETE_OUTFIT_REJECTED':
+    case 'CREATE_OUTFIT_REJECTED':
+    case 'FETCH_OUTFITS_OPTIONS_REJECTED':
       return {
         ...state,
         fetching: false,
         error: errorMessage(payload),
       };
-    case 'FETCH_ITEMS_OPTIONS_FULFILLED':
+    case 'FETCH_OUTFITS_OPTIONS_FULFILLED':
       return {
         ...state,
         fetching: false,
@@ -46,22 +46,22 @@ const reducer = (state = initalState, { type, payload, meta }) => {
           categories: payload.data.categories,
         },
       };
-    case 'CREATE_ITEM_FULFILLED':
-      return {
-        ...state,
-        fetching: false,
-        items: state.items.concat(payload.data.item),
-        count: state.count + 1,
-      };
-    case 'DELETE_ITEM_PENDING':
+    case 'DELETE_OUTFIT_PENDING':
       return {
         ...state,
         deletingId: meta.id,
       };
-    case 'DELETE_ITEM_FULFILLED':
+    case 'CREATE_OUTFIT_FULFILLED':
       return {
         ...state,
-        items: state.items.filter(i => i.id !== payload.data.id),
+        fetching: false,
+        outfits: state.outfits.concat(payload.data.outfit),
+        count: state.count + 1,
+      };
+    case 'DELETE_OUTFIT_FULFILLED':
+      return {
+        ...state,
+        outfits: state.outfits.filter(i => i.id !== payload.data.id),
         count: state.count - 1,
         deletingId: null,
       };

@@ -17,9 +17,12 @@ Rails.application.routes.draw do
   namespace :v1, defaults: { format: :json } do
     # API Resources here
     resource :profile, only: %i[show update], path: :me
+
     resources :items do
       get :options, on: :collection
     end
+
+    resources :outfits
   end
 
   match '*unmatched_route', via: :get, to: 'pages#home', format: false

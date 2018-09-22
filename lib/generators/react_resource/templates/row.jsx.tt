@@ -1,0 +1,15 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+
+const Row = ({ <%= resource_name.downcase %>, handleDelete }) => (
+  <div className="col-md-4">
+    {/* Your row data here */}
+  </div>
+);
+
+Row.propTypes = {
+  handleDelete: PropTypes.func.isRequired,
+  <%= resource_name.downcase %>: PropTypes.shape(Object).isRequired,
+};
+
+export default Row;
