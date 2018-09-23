@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import classNames from 'classnames';
 
@@ -7,7 +8,9 @@ const Row = ({ outfit, handleLike, likingId = null }) => (
   <div className="col-sm-6 col-xl-4">
     <div className="card">
       <div className="card-body d-flex flex-column">
-        <h4 className="card-title">{outfit.name}</h4>
+        <h4 className="card-title">
+          <Link to={`explores/${outfit.id}`}>{outfit.name}</Link>
+        </h4>
         <p className="card-text">Yes</p>
 
         <div className="d-flex align-items-center pt-5 mt-auto">

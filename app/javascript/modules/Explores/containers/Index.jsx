@@ -33,7 +33,7 @@ class Index extends Component {
 
   render() {
     const {
-      fetching, outfits, likingId,
+      fetching, outfits, likingId, error,
     } = this.props;
     return (
       <Fragment>
@@ -42,7 +42,7 @@ class Index extends Component {
             Explore Other Outfits
           </h1>
         </div>
-        <ContentDimmer active={fetching}>
+        <ContentDimmer active={fetching} error={error}>
           {outfits.length === 0
             ? this.renderEmpty()
             : (
@@ -69,6 +69,7 @@ Index.propTypes = {
   fetching: PropTypes.bool.isRequired,
   outfits: PropTypes.arrayOf(Object).isRequired,
   likingId: PropTypes.number,
+  error: PropTypes.string,
 };
 
 const mapStateToProps = store => store.explores;

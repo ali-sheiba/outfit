@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Switch } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 
 import PrivateRoute from 'components/PrivateRoute';
 import Session from 'utils/session';
@@ -37,7 +37,8 @@ class App extends Component {
               <Switch>
                 <PrivateRoute path="/outfits" component={Outfits} isAuthenticated={isAuthenticated} />
                 <PrivateRoute path="/items" component={Items} isAuthenticated={isAuthenticated} />
-                <PrivateRoute path="/" component={Explores} isAuthenticated={isAuthenticated} />
+                <PrivateRoute path="/explores" component={Explores} isAuthenticated={isAuthenticated} />
+                <Redirect to="/explores" />
               </Switch>
             </div>
           </div>

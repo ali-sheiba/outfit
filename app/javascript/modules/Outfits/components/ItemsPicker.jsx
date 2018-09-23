@@ -10,43 +10,33 @@ import Target from './Target';
 class ItemsPicker extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      picked: props.input.value || [],
-    };
     this.handleDrop = this.handleDrop.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { picked } = this.state;
-    const { input } = this.props;
-    if (prevState.picked !== picked) {
-      input.onChange(picked);
-    }
-  }
-
   handleDrop(id) {
-    const { picked } = this.state;
-    if (picked.length >= 6) {
+    const { input } = this.props;
+    const values = Object.assign([], input.value);
+
+    if (values.length >= 6) {
       return alert('Maximum 6 Items per outfit');
     }
 
-    return this.setState({ picked: picked.concat(id) });
+    return input.onChange(values.concat(id));
   }
 
   handleRemove(id) {
-    this.setState(({ picked }) => {
-      const index = picked.findIndex(item => item === id);
-      picked.splice(index, 1);
-      return { picked };
-    });
+    const { input } = this.props;
+    const values = Object.assign([], input.value || []);
+    const index = values.findIndex(item => item === id);
+    values.splice(index, 1);
+    return input.onChange(values);
   }
 
   render() {
-    const { items } = this.props;
-    const { picked } = this.state;
-    const availableItems = items.filter(i => !picked.includes(i.id)) || [];
-    const selectedItems = items.filter(i => picked.includes(i.id)) || [];
+    const { items, meta, input: { value } } = this.props;
+    const availableItems = items.filter(i => !value.includes(i.id)) || [];
+    const selectedItems = items.filter(i => value.includes(i.id)) || [];
 
     return (
       <div className="row">
@@ -71,12 +61,18 @@ class ItemsPicker extends Component {
 
         <div className="col">
           <div className="card">
-            <div className="card-header">Target</div>
+            <div className="card-header">Outfit Items</div>
             <Target
               items={selectedItems}
               handleRemove={this.handleRemove}
             />
           </div>
+
+          {meta.error && (
+            <div className="alert alert-danger">
+              {meta.error}
+            </div>
+          )}
         </div>
       </div>
     );
@@ -85,6 +81,7 @@ class ItemsPicker extends Component {
 
 ItemsPicker.propTypes = {
   input: PropTypes.shape(Object).isRequired,
+  meta: PropTypes.shape(Object).isRequired,
   items: PropTypes.arrayOf(Object).isRequired,
 };
 

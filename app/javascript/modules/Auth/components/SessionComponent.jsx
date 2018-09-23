@@ -7,7 +7,8 @@ import Session from 'utils/session';
 class SessionComponent extends Component {
   componentDidMount() {
     const { isLogin, logoutAction } = this.props;
-    return isLogin && logoutAction() && Session.clearAccessToken();
+    if (isLogin) logoutAction();
+    Session.clearAccessToken();
   }
 
   handleSubmit = (values) => {

@@ -18,6 +18,7 @@ const reducer = (state = initalState, { type, payload, meta }) => {
       return {
         ...state,
         fetching: true,
+        error: false,
       };
     case 'EXPLORE_OUTFITS_FULFILLED':
       return {
@@ -43,6 +44,7 @@ const reducer = (state = initalState, { type, payload, meta }) => {
       return {
         ...state,
         likingId: meta.id,
+        error: false,
       };
     case 'LIKE_OUTFIT_FULFILLED':
       return {

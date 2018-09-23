@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { TextInput } from 'components/FormFields';
-import { required } from 'components/FormFields/Validations';
+import { required, minLength } from 'components/FormFields/Validations';
 import ItemsPicker from './ItemsPicker';
+
+const min1 = minLength(1);
 
 const Form = ({
   error, handleSubmit, submitting, items,
@@ -27,7 +29,7 @@ const Form = ({
         name="outfit[item_ids]"
         items={items}
         component={ItemsPicker}
-        validate={[required]}
+        validate={[required, min1]}
       />
     </div>
 
@@ -38,7 +40,7 @@ const Form = ({
     )}
 
     <div className="card-footer text-center">
-      <Button color="primary" disabled={submitting}>Submit</Button>
+      <Button type="submit" color="primary" disabled={submitting}>Submit</Button>
     </div>
   </form>
 );

@@ -18,7 +18,13 @@ class Target extends Component {
     const { handleRemove } = this.props;
     return (
       <div key={item.id} className="list-group-item">
-        <button className="float-right btn btn-link p-0 btn-sm" onClick={() => handleRemove(item.id)}>
+        <button
+          className="float-right btn btn-link p-0 btn-sm"
+          onClick={(e) => {
+            e.preventDefault();
+            return handleRemove(item.id);
+          }}
+        >
           <i className="fas fa-times text-danger pointer" />
         </button>
         {item.name}
