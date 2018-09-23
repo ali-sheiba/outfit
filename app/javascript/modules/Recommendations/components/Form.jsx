@@ -1,0 +1,45 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
+import { Field, reduxForm } from 'redux-form';
+import { TextInput } from 'components/FormFields';
+import { required } from 'components/FormFields/Validations';
+
+const Form = ({
+  error, handleSubmit, submitting,
+}) => (
+  <form onSubmit={handleSubmit} className="card">
+    <div className="card-body">
+      <Field
+        autoFocus
+        label="Name"
+        placeholder="Item Name"
+        name="recommendation[name]"
+        component={TextInput}
+        validate={[required]}
+      />
+    </div>
+
+    {error && (
+    <div className="alert alert-danger card-alert">
+      {error}
+    </div>
+    )}
+
+    <div className="card-footer">
+      <Button color="primary" disabled={submitting}>Submit</Button>
+    </div>
+  </form>
+);
+
+Form.defaultProps = {
+  error: null,
+};
+
+Form.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+};
+
+export default reduxForm({ form: 'recommendation' })(Form);

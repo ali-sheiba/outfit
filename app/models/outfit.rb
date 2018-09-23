@@ -51,21 +51,10 @@ class Outfit < ApplicationRecord
 
   ## ------------------- Class Methods -------------------- ##
 
-  def self.all_to_h
-    all.includes(:items)
-       .map do |o|
-         {
-           id: o.id,
-           items: o.items.map do |i|
-                    {
-                      id: i.id,
-                      brand: i.brand_id,
-                      color: i.color_id,
-                      catagory: i.category_id
-                    }
-                  end
-         }
-       end
+  def self.all_to_h(user_id = nil)
+    where.not(user_id: user_id)
+         .includes(:items)
+         .as_api_response(:recommendations)
   end
 
   ## ---------------------- Methods ----------------------- ##

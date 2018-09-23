@@ -15,6 +15,7 @@ import { getProfile } from 'modules/Auth/actions';
 import Items from 'modules/Items';
 import Outfits from 'modules/Outfits';
 import Explores from 'modules/Explores';
+import Recommendations from 'modules/Recommendations';
 
 class App extends Component {
   componentDidMount() {
@@ -38,6 +39,7 @@ class App extends Component {
                 <PrivateRoute path="/outfits" component={Outfits} isAuthenticated={isAuthenticated} />
                 <PrivateRoute path="/items" component={Items} isAuthenticated={isAuthenticated} />
                 <PrivateRoute path="/explores" component={Explores} isAuthenticated={isAuthenticated} />
+                <PrivateRoute path="/recommendations" component={Recommendations} isAuthenticated={isAuthenticated} />
                 <Redirect to="/explores" />
               </Switch>
             </div>

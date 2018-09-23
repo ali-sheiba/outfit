@@ -47,6 +47,9 @@ const Api = (baseURL = '/v1/') => {
     exploreOutfits: params => api.get('/explores', { params }),
     exploreOutfit: (id, params) => api.get(`/explores/${id}`, { params }),
     likeOutfit: (id, params) => api.post(`/explores/${id}/like`, { params }),
+
+    // Recommendations APIs
+    getRecommendations: params => api.post('/recommendations', params),
   };
 };
 

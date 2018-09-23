@@ -17,7 +17,7 @@ module MissingData
 
     required_fields.each { |f| missing << f unless data[f].present? }
 
-    return render_smart_error(error_code, extra: missing) unless missing.blank?
+    return render_smart_error(error: error_code, extra: missing) unless missing.blank?
 
     false
   end

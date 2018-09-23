@@ -42,4 +42,10 @@ class Power
     Outfit.includes(:user, items: %i[category brand color])
           .where.not(user_id: current_user.id)
   end
+
+  ######################## V1::RecommendationsController #######################
+
+  power :recommendations do
+    true
+  end
 end
