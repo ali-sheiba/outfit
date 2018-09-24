@@ -13,6 +13,7 @@ module ItemPresenter
       t.add :brand, template: :base
       t.add :color, template: :base
       t.add :price
+      t.add :image_url
     end
 
     api_accessible :index, extend: :base

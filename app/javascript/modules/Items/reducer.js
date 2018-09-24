@@ -51,7 +51,7 @@ const reducer = (state = initalState, { type, payload, meta }) => {
       return {
         ...state,
         fetching: false,
-        items: state.items.concat(payload.data.item),
+        items: [...state.items, payload.data.item],
         count: state.count + 1,
       };
     case 'DELETE_ITEM_PENDING':

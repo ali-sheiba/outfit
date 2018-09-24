@@ -33,6 +33,9 @@ class Item < ApplicationRecord
   ## -------------------- Requirements -------------------- ##
 
   include ItemPresenter
+  has_one_attached :image
+
+  attr_accessor :image_contents, :image_name
 
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##
@@ -52,7 +55,38 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :price, presence: true
 
+  validate :image_validations, on: :create
+
   ## --------------------- Callbacks ---------------------- ##
+
+  after_create :parse_image
+
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
+
+  def image_validations
+    errors.add(:base, I18n.t('errors.image_file_required')) if image_contents.nil?
+  end
+
+  def parse_image
+    return if image_contents.nil? || image_contents[%r/(image\/[a-z]{3,4})|(application\/[a-z]{3,4})/] == ''
+
+    content_type = image_contents[%r/(image\/[a-z]{3,4})|(application\/[a-z]{3,4})/]
+    content_type = content_type[%r{\b(?!.*\/).*}]
+    contents = image_contents.sub(%r/data:((image|application)\/.{3,}),/, '')
+    decoded_data = Base64.decode64(contents)
+    filename = image_name || 'image_' + Time.zone.now.to_s + '.' + content_type
+    FileUtils.mkdir_p("#{Rails.root}/tmp/images")
+    File.open("#{Rails.root}/tmp/images/#{filename}", 'wb') do |f|
+      f.write(decoded_data)
+    end
+    image.attach(io: File.open("#{Rails.root}/tmp/images/#{filename}"), filename: filename)
+    FileUtils.rm("#{Rails.root}/tmp/images/#{filename}")
+  end
+
+  def image_url
+    return unless image.attached?
+
+    Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)
+  end
 end

@@ -15,11 +15,21 @@ class Index extends Component {
 
   handleSubmit = (values) => {
     const { submit, history } = this.props;
-    return submit(values).then(({ value }) => {
+    return submit(this.processImageTags(values)).then(({ value }) => {
       NotificationManager.success(value.data.message);
       history.push('/items');
     }).catch(err => errCatcher(err));
   };
+
+  processImageTags = ({ item }) => ({
+    item: {
+      ...item,
+      image: null,
+      image_contents: item.image.base64,
+      image_name: item.image.name,
+    },
+  })
+
 
   render() {
     const { fetching, options, error } = this.props;
@@ -31,7 +41,7 @@ class Index extends Component {
           </h1>
         </div>
         <div className="row">
-          { !fetching && <Form onSubmit={this.handleSubmit} options={options} />}
+          { !fetching && <Form onSubmit={this.handleSubmit} options={options} /> }
         </div>
       </ContentDimmer>
     );

@@ -33,5 +33,7 @@ Rails.application.routes.draw do
     resources :recommendations, only: %i[create]
   end
 
-  match '*unmatched_route', via: :get, to: 'pages#home', format: false
+  match '*unmatched_route', via: :get, to: 'pages#home', format: false, constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end

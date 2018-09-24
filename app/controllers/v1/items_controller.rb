@@ -58,7 +58,9 @@ class V1::ItemsController < V1::BaseController
             :price,
             :brand_id,
             :category_id,
-            :color_id
+            :color_id,
+            :image_contents,
+            :image_name
           )
   end
 

@@ -21,6 +21,7 @@ const Row = ({ item, handleDelete, deletingId }) => (
         </div>
         )}
       </div>
+      <img className="card-img-top" src={item.image_url} alt={item.name} />
       <div className="card-body">
         <p className="card-text m-0">
           <strong>Category: </strong>

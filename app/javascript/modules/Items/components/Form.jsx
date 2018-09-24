@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
-import { DropdownListInput, TextInput } from 'components/FormFields';
+import { DropdownListInput, TextInput, FileInput } from 'components/FormFields';
 import { required } from 'components/FormFields/Validations';
 
 const Form = ({
@@ -57,6 +57,13 @@ const Form = ({
         data={options.colors}
         valueField="id"
         textField="name"
+        validate={[required]}
+      />
+
+      <Field
+        label="Image"
+        name="item[image]"
+        component={FileInput}
         validate={[required]}
       />
     </div>
