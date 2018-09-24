@@ -39,14 +39,14 @@ class Index extends Component {
       <Fragment>
         <div className="page-header">
           <h1 className="page-title">
-            Explore Other Outfits
+            Explore Outfits
           </h1>
         </div>
         <ContentDimmer active={fetching} error={error}>
           {outfits.length === 0
             ? this.renderEmpty()
             : (
-              <div className="row justify-content-center">
+              <div className="card-columns">
                 {outfits.map(i => (
                   <Row
                     key={i.id}

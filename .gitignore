@@ -36,3 +36,4 @@ erd.pdf
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+lib/tasks/importer.rake

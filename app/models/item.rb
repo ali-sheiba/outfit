@@ -6,7 +6,7 @@
 #
 #  id          :bigint(8)        not null, primary key
 #  name        :string           not null
-#  price       :decimal(5, 2)    not null
+#  price       :decimal(6, 2)    not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  brand_id    :bigint(8)        not null
@@ -38,6 +38,9 @@ class Item < ApplicationRecord
   attr_accessor :image_contents, :image_name
 
   ## ----------------------- Scopes ----------------------- ##
+
+  default_scope { with_attached_image }
+
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   ## -------------------- Associations -------------------- ##

@@ -11,7 +11,7 @@ import Form from '../components/Form';
 class New extends Component {
   componentDidMount() {
     const { getItems } = this.props;
-    getItems();
+    getItems({ limit: -1 });
   }
 
   handleSubmit = (values) => {

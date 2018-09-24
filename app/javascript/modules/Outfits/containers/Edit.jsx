@@ -12,7 +12,7 @@ class Edit extends Component {
   componentDidMount() {
     const { getItems, getOutfit, match } = this.props;
     getOutfit(match.params.id);
-    getItems();
+    getItems({ limit: -1 });
   }
 
   handleSubmit = (values) => {

@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_205144) do
     t.bigint "brand_id", null: false
     t.bigint "color_id", null: false
     t.string "name", null: false
-    t.decimal "price", precision: 5, scale: 2, null: false
+    t.decimal "price", precision: 6, scale: 2, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["brand_id"], name: "index_items_on_brand_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2018_09_22_205144) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_counter", default: 0, null: false
-    t.decimal "total_price", precision: 5, scale: 2, default: "0.0", null: false
+    t.decimal "total_price", precision: 6, scale: 2, default: "0.0", null: false
     t.index ["name"], name: "index_outfits_on_name"
     t.index ["user_id"], name: "index_outfits_on_user_id"
   end

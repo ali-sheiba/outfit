@@ -26,7 +26,6 @@ class Power
 
   power :items do
     current_user.items
-                .with_attached_image
                 .includes(:category, :brand, :color)
   end
 

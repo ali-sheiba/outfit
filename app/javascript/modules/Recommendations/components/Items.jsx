@@ -5,28 +5,26 @@ import ContentDimmer from 'components/ContentDimmer';
 import classNames from 'classnames';
 
 const ShowItem = ({ item }) => (
-  <div className="card">
+  <div className="card card-aside">
+    <img src={item.image_url} alt={item.name} className="card-aside-column h-100" />
     <div className="card-body">
-      <div className="row">
-        <div className="col-md-4 pb-2">Image</div>
-        <div className="col-md-2 pb-2">
-          <strong className="d-block">Brand:</strong>
-          {item.brand.name}
-        </div>
-        <div className="col-md-2 pb-2">
-          <strong className="d-block">Category:</strong>
-          {item.category.name}
-        </div>
-        <div className="col-md-2 pb-2">
-          <strong className="d-block">Color:</strong>
-          {item.color.name}
-        </div>
-        <div className="col-md-2">
-          <strong className="d-block">Price:</strong>
-          {item.price}
-          {' '}
-          AED
-        </div>
+      <div className="pb-2">
+        <strong className="d-block">Brand:</strong>
+        {item.brand.name}
+      </div>
+      <div className="pb-2">
+        <strong className="d-block">Category:</strong>
+        {item.category.name}
+      </div>
+      <div className="pb-2">
+        <strong className="d-block">Color:</strong>
+        {item.color.name}
+      </div>
+      <div>
+        <strong className="d-block">Price:</strong>
+        {item.price}
+        {' '}
+        AED
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
 #  id            :bigint(8)        not null, primary key
 #  likes_counter :integer          default(0), not null
 #  name          :string           not null
-#  total_price   :decimal(5, 2)    default(0.0), not null
+#  total_price   :decimal(6, 2)    default(0.0), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  user_id       :bigint(8)        not null
@@ -60,7 +60,7 @@ class Outfit < ApplicationRecord
   ## ---------------------- Methods ----------------------- ##
 
   def max_outfits_per_user
-    errors.add(:base, 'Max 10 outfits per user') if Outfit.where(user_id: user_id).count >= 10
+    errors.add(:base, 'Max 10 outfits per user') if Outfit.where(user_id: user_id).count > 10
   end
 
   def set_total_price

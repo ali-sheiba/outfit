@@ -66,6 +66,7 @@ GEM
     choice (0.2.0)
     coderay (1.1.2)
     concurrent-ruby (1.0.5)
+    connection_pool (2.2.2)
     consul (0.13.1)
       edge_rider (>= 0.3.0)
       memoizer
@@ -172,6 +173,8 @@ GEM
     rack-attack (5.4.0)
       rack (>= 1.0, < 3)
     rack-cors (1.0.2)
+    rack-protection (2.0.4)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -241,6 +244,10 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sidekiq (5.2.2)
+      connection_pool (~> 2.2, >= 2.2.2)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 5)
     smart_error (1.0.2)
       activesupport (>= 5.0)
       i18n (>= 0.8)
@@ -316,6 +323,7 @@ DEPENDENCIES
   redis (~> 4.0)
   rubocop
   sass-rails (~> 5.0)
+  sidekiq
   smart_error
   spring
   spring-watcher-listen (~> 2.0.0)

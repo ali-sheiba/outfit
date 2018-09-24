@@ -4,6 +4,7 @@ AllCops:
     - bin/**
     - db/**/*
     - node_modules/**/*
+    - lib/tasks/importer.rake
 
 Documentation:
   Enabled: false

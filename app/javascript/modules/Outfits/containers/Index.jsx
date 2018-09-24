@@ -47,7 +47,7 @@ class Index extends Component {
           {count === 0
             ? this.renderEmpty()
             : (
-              <div className="row justify-content-center">
+              <div className="card-columns">
                 {outfits.map(i => (
                   <Row
                     key={i.id}

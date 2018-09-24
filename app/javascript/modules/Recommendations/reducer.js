@@ -14,6 +14,7 @@ const reducer = (state = initalState, { type, payload }) => {
         ...state,
         fetching: true,
         error: false,
+        recommendations: [],
       };
     case 'FETCH_RECOMMENDATIONS_FULFILLED':
       return {

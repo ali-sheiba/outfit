@@ -16,7 +16,7 @@ class Index extends Component {
 
   componentDidMount() {
     const { fetchRecords } = this.props;
-    fetchRecords();
+    fetchRecords({ limit: -1 });
   }
 
   handleDelete(id) {
@@ -54,6 +54,7 @@ class Index extends Component {
                     item={i}
                     handleDelete={this.handleDelete}
                     deletingId={deletingId}
+                    colClass="col-md-3"
                   />
                 ))}
               </div>
