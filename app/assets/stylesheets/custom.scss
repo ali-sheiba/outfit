@@ -19,12 +19,11 @@
   cursor: pointer;
 }
 
-.my-items-box {
-  max-height: 400px;
-  overflow-y: scroll;
-}
-
 .card-delete-btn {
     right: 10px;
     bottom: 10px;
+}
+
+.w-45p {
+  max-width: 45px;
 }

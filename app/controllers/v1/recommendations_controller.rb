@@ -11,10 +11,12 @@ class V1::RecommendationsController < V1::BaseController
 
     @rec = Recommender.new(params[:item_id], current_user.id)
     @rec.perform
-    # binding.pry
-    puts @rec.scores
+
+    Rails.logger.debug(@rec.scores.to_json)
+
     data = {
-      outfits: outfits
+      outfits: outfits,
+      items: items
     }
     render_success(data: data)
   end
@@ -36,5 +38,11 @@ class V1::RecommendationsController < V1::BaseController
         .as_api_response(:recommended, template_injector)
         .sort_by { |o| o[:score] }
         .reverse
+  end
+
+  def items
+    @rec.items
+        .includes(:category, :color, :brand)
+        .as_api_response(:base, template_injector)
   end
 end

@@ -47,7 +47,7 @@ class Outfit < ApplicationRecord
 
   ## --------------------- Callbacks ---------------------- ##
 
-  after_validation :set_total_price
+  before_validation :set_total_price
 
   ## ------------------- Class Methods -------------------- ##
 

@@ -15,8 +15,8 @@ const Form = ({
     <div className="card-body">
       <Field
         autoFocus
-        label="Give it a name"
-        placeholder="Item Name"
+        label="Name"
+        placeholder="Outfit Name"
         name="outfit[name]"
         component={TextInput}
         validate={[required]}

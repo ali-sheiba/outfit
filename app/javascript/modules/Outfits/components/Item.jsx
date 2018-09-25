@@ -22,7 +22,9 @@ const Item = ({ item, connectDragSource, isDragging }) => {
   const opacity = isDragging ? 0 : 1;
   const cursor = isDragging ? '-webkit-grabbing' : '-webkit-grab';
   return connectDragSource(
-    <div className="list-group-item" style={{ opacity, cursor }}>{item.name}</div>,
+    <div className="col-2" style={{ opacity, cursor }}>
+      <img src={item.image_url} alt={item.name} />
+    </div>,
   );
 };
 

@@ -9,12 +9,6 @@ const Row = ({ outfit }) => (
         <small className="d-block">
           {`Total Price: ${outfit.total_price} AED`}
         </small>
-        {/* <small className="d-block">
-          {`Likes: ${outfit.likes}`}
-        </small> */}
-        {/* <small className="d-block">
-          {`Score: ${outfit.score}`}
-        </small> */}
       </div>
       <h5 className="card-title">
         <strong>{outfit.name}</strong>
@@ -31,6 +25,12 @@ const Row = ({ outfit }) => (
           />
         ))}
       </div>
+      {/* <div className="mt-2">
+        <pre>
+          {`Likes: ${outfit.likes}\n`}
+          {`Score: ${outfit.score}`}
+        </pre>
+      </div> */}
     </div>
   </div>
 );

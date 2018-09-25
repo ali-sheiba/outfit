@@ -34,16 +34,14 @@ const Items = ({
   items, error, fetching, selectedItem, handleSelect,
 }) => {
   const itemRow = item => (
-    <div key={`item-${item.id}`} className="col-md-3">
+    <div key={`item-${item.id}`} className="col-md-2">
       <button
         onClick={() => handleSelect(item.id)}
-        className={classNames('card m-0 h-100 pointer', {
+        className={classNames('border h-100 pointer p-0', {
           'bg-azure-lighter': selectedItem === item.id,
         })}
       >
-        <div className="card-body">
-          {item.name}
-        </div>
+        <img src={item.image_url} alt={item.name} />
       </button>
     </div>
   );

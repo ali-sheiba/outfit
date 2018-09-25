@@ -24,7 +24,7 @@
 
 FactoryBot.define do
   factory :outfit_item do
-    item   { Item.random.first }
     outfit { Outfit.random.first }
+    item   { outfit.user.items.random.first }
   end
 end

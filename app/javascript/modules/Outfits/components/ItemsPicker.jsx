@@ -39,41 +39,36 @@ class ItemsPicker extends Component {
     const selectedItems = items.filter(i => value.includes(i.id)) || [];
 
     return (
-      <div className="row">
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-header">My Items</div>
-            <div className="card-body">
-              <div className="my-items-box">
-                <div className="list-group">
-                  {availableItems.map(i => (
-                    <Item
-                      key={i.id}
-                      item={i}
-                      handleDrop={this.handleDrop}
-                    />
-                  ))}
-                </div>
-              </div>
+      <div>
+        <div className="card">
+          <div className="card-header">My Items</div>
+          <div className="card-body">
+            <div className="flex-nowrap row o-auto">
+              {availableItems.map(i => (
+                <Item
+                  key={i.id}
+                  item={i}
+                  handleDrop={this.handleDrop}
+                />
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="col">
-          <div className="card">
-            <div className="card-header">Outfit Items</div>
-            <Target
-              items={selectedItems}
-              handleRemove={this.handleRemove}
-            />
-          </div>
-
-          {meta.error && (
-            <div className="alert alert-danger">
-              {meta.error}
-            </div>
-          )}
+        <div className="card">
+          {meta.error && <div className="card-status bg-red" />}
+          <div className="card-header">Outfit Items</div>
+          <Target
+            items={selectedItems}
+            handleRemove={this.handleRemove}
+          />
         </div>
+
+        {meta.error && (
+          <div className="alert alert-danger">
+            {meta.error}
+          </div>
+        )}
       </div>
     );
   }

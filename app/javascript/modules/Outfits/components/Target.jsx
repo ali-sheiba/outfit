@@ -17,59 +17,70 @@ class Target extends Component {
   renderItem(item) {
     const { handleRemove } = this.props;
     return (
-      <div key={item.id} className="list-group-item">
-        <button
-          className="float-right btn btn-link p-0 btn-sm"
-          onClick={(e) => {
-            e.preventDefault();
-            return handleRemove(item.id);
-          }}
-        >
-          <i className="fas fa-times text-danger pointer" />
-        </button>
-        {item.name}
-        <span className="float-right text-muted mr-2">{item.price}</span>
-      </div>
+      <tr key={item.id}>
+        <td className="w-45p">
+          <img src={item.image_url} alt={item.name} className="h-8" />
+        </td>
+        <td>
+          {item.name}
+          <button
+            className="btn btn-link p-0 btn-sm ml-2"
+            onClick={(e) => {
+              e.preventDefault();
+              return handleRemove(item.id);
+            }}
+          >
+            <i className="fas fa-times text-danger pointer" />
+          </button>
+        </td>
+        <td className="d-none d-md-table-cell text-nowrap text-right">
+          {'AED '}
+          <strong>{item.price}</strong>
+        </td>
+      </tr>
     );
   }
 
   renderList() {
-    const { items } = this.props;
+    const { items, isOver } = this.props;
     return (
-      <div>
-        <div className="list-group">
+      <table className={classNames('table card-table table-vcenter', { 'bg-azure-lightest': isOver })}>
+        <tbody>
           {items.map(i => this.renderItem(i))}
-        </div>
-        <div className="row text-center text-muted m-0 mt-4">
-          <div className="col">
-            {items.length}
-            {' '}
-            / 6 Items
-          </div>
-          <div className="col">
-            Total Price:
-            {' '}
-            {this.grandTotal()}
-          </div>
-        </div>
-      </div>
+          <tr>
+            <td colSpan={2} className="text-center">
+              {items.length}
+              {' '}
+              / 6 Items
+            </td>
+            <td className="text-right">
+              Total Price: AED
+              {' '}
+              <strong>{this.grandTotal()}</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 
-  renderNone = () => (
-    <div className="text-center text-muted">
-      No Selected Items
-    </div>
-  );
+  renderNone = () => {
+    const { isOver } = this.props;
+    return (
+      <div className={classNames('card-body', { 'bg-azure-lightest': isOver })}>
+        <div className="text-center p-5 text-muted">
+          Drag items here
+        </div>
+      </div>
+    );
+  };
 
   render() {
-    const { connectDropTarget, isOver, items } = this.props;
+    const { connectDropTarget, items } = this.props;
     return connectDropTarget(
-      <div className={classNames('card-body', { 'bg-azure-lightest': isOver })}>
-        {items.length > 0
-          ? this.renderList()
-          : this.renderNone()}
-      </div>,
+      items.length > 0
+        ? this.renderList()
+        : this.renderNone(),
     );
   }
 }
