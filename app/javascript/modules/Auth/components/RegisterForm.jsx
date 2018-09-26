@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import TextInput from 'components/FormFields/TextInput';
-import { required, email } from 'components/FormFields/Validations';
+import { required, email, mobile } from 'components/FormFields/Validations';
 
 const Form = ({ error, handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit} className="card">
@@ -18,7 +18,7 @@ const Form = ({ error, handleSubmit, submitting }) => (
       <Field
         label="First Name"
         autoFocus
-        placeholder="First Name"
+        placeholder="John"
         tabIndex="1"
         name="user[first_name]"
         component={TextInput}
@@ -27,7 +27,7 @@ const Form = ({ error, handleSubmit, submitting }) => (
 
       <Field
         label="Last Name"
-        placeholder="Last Name"
+        placeholder="Doe"
         tabIndex="2"
         name="user[last_name]"
         component={TextInput}
@@ -36,11 +36,14 @@ const Form = ({ error, handleSubmit, submitting }) => (
 
       <Field
         label="Mobile"
-        placeholder="Mobile"
+        placeholder="05XXXXXXXX"
+        pattern="(05){1}(\d){8}"
         tabIndex="3"
         name="user[mobile]"
+        type="tel"
+        maxLength="10"
         component={TextInput}
-        validate={[required]}
+        validate={[required, mobile]}
       />
 
       <Field
@@ -54,7 +57,7 @@ const Form = ({ error, handleSubmit, submitting }) => (
 
       <Field
         label="Email"
-        placeholder="Email"
+        placeholder="example@gmail.com"
         tabIndex="5"
         type="email"
         name="user[email]"

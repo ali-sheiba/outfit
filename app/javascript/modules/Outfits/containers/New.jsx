@@ -7,6 +7,7 @@ import { errCatcher } from 'utils/errors';
 import { fetchItemsIfNeeded } from 'modules/Items/actions';
 import { createOutfit } from '../actions';
 import Form from '../components/Form';
+import CheckItems from '../components/CheckItems';
 
 class New extends Component {
   componentDidMount() {
@@ -24,17 +25,21 @@ class New extends Component {
 
   render() {
     const {
-      items: { items, fetching, error },
+      items: {
+        items, fetching, error, count,
+      },
     } = this.props;
 
     return (
       <ContentDimmer active={fetching} error={error}>
-        <div className="page-header">
-          <h1 className="page-title">
-            Create Outfits
-          </h1>
-        </div>
-        { !fetching && <Form onSubmit={this.handleSubmit} items={items} />}
+        <CheckItems count={count}>
+          <div className="page-header">
+            <h1 className="page-title">
+              Create Outfits
+            </h1>
+          </div>
+          { !fetching && <Form onSubmit={this.handleSubmit} items={items} />}
+        </CheckItems>
       </ContentDimmer>
     );
   }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import { DropdownListInput, TextInput, FileInput } from 'components/FormFields';
-import { required } from 'components/FormFields/Validations';
+import { required, number } from 'components/FormFields/Validations';
 
 const Form = ({
   error, handleSubmit, submitting, options,
@@ -23,8 +23,9 @@ const Form = ({
         label="Price"
         placeholder="Item Price"
         name="item[price]"
+        type="number"
         component={TextInput}
-        validate={[required]}
+        validate={[required, number]}
       />
 
       <Field

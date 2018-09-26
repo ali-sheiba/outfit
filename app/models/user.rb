@@ -49,7 +49,9 @@ class User < ApplicationRecord
 
   validates :first_name,    presence: true
   validates :last_name,     presence: true
-  validates :mobile,        presence: true
+  validates :mobile,        presence: true,
+                            format: { with: /\A(05){1}(\d){8}\z/, message: 'Invalid UAE Mobile number' },
+                            numericality: true
   validates :date_of_birth, presence: true
 
   ## --------------------- Callbacks ---------------------- ##

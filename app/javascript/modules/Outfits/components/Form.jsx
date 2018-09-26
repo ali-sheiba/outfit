@@ -6,7 +6,7 @@ import { TextInput } from 'components/FormFields';
 import { required, minLength } from 'components/FormFields/Validations';
 import ItemsPicker from './ItemsPicker';
 
-const min1 = minLength(1);
+const min3 = minLength(3, 'You have to add at least 3 items');
 
 const Form = ({
   error, handleSubmit, submitting, items,
@@ -29,7 +29,7 @@ const Form = ({
         name="outfit[item_ids]"
         items={items}
         component={ItemsPicker}
-        validate={[required, min1]}
+        validate={[required, min3]}
       />
     </div>
 

@@ -33,6 +33,12 @@ class ItemsPicker extends Component {
     return input.onChange(values);
   }
 
+  renderEmpty = () => (
+    <div className="text-center text-muted">
+      No More Items
+    </div>
+  )
+
   render() {
     const { items, meta, input: { value } } = this.props;
     const availableItems = items.filter(i => !value.includes(i.id)) || [];
@@ -43,15 +49,17 @@ class ItemsPicker extends Component {
         <div className="card">
           <div className="card-header">My Items</div>
           <div className="card-body">
-            <div className="flex-nowrap row o-auto">
-              {availableItems.map(i => (
-                <Item
-                  key={i.id}
-                  item={i}
-                  handleDrop={this.handleDrop}
-                />
-              ))}
-            </div>
+            {availableItems.length >= 1 ? (
+              <div className="flex-nowrap row o-auto">
+                {availableItems.map(i => (
+                  <Item
+                    key={i.id}
+                    item={i}
+                    handleDrop={this.handleDrop}
+                  />
+                ))}
+              </div>
+            ) : this.renderEmpty() }
           </div>
         </div>
 

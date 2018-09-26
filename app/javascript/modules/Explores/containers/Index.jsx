@@ -27,7 +27,7 @@ class Index extends Component {
 
   renderEmpty = () => (
     <div className="text-center text-muted py-5">
-      <div>You dont have any outfits</div>
+      <div>There are no outfits in the system :(</div>
     </div>
   )
 

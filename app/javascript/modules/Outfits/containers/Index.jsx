@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { NotificationManager } from 'react-notifications';
 import ContentDimmer from 'components/ContentDimmer';
 import { errCatcher } from 'utils/errors';
+import { fetchItemsIfNeeded } from 'modules/Items/actions';
 import { fetchOutfitsIfNeeded, deleteOutfit } from '../actions';
 import Row from '../components/Row';
+import CheckItems from '../components/CheckItems';
 
 class Index extends Component {
   constructor(props) {
@@ -15,7 +17,8 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    const { fetchRecords } = this.props;
+    const { fetchRecords, getItems } = this.props;
+    getItems();
     fetchRecords();
   }
 
@@ -34,7 +37,12 @@ class Index extends Component {
 
   render() {
     const {
-      fetching, count, outfits, deletingId, error,
+      outfits: {
+        fetching, count, outfits, deletingId, error,
+      },
+      items: {
+        count: itemsCount, fetching: iFetching, error: iError,
+      },
     } = this.props;
     return (
       <Fragment>
@@ -43,48 +51,51 @@ class Index extends Component {
             Outfits
           </h1>
         </div>
-        <ContentDimmer active={fetching} error={error}>
-          {count === 0
-            ? this.renderEmpty()
-            : (
-              <div className="card-columns">
-                {outfits.map(i => (
-                  <Row
-                    key={i.id}
-                    outfit={i}
-                    handleDelete={this.handleDelete}
-                    deletingId={deletingId}
-                  />
-                ))}
-              </div>
-            )}
+        <ContentDimmer active={fetching || iFetching} error={error || iError}>
+          <CheckItems count={itemsCount}>
+            {count === 0
+              ? this.renderEmpty()
+              : (
+                <div className="card-columns">
+                  {outfits.map(i => (
+                    <Row
+                      key={i.id}
+                      outfit={i}
+                      handleDelete={this.handleDelete}
+                      deletingId={deletingId}
+                    />
+                  ))}
+                </div>
+              )}
+          </CheckItems>
         </ContentDimmer>
+        {itemsCount >= 3 && (
         <div className="text-center pt-5">
           <Link to="/outfits/new" className="btn btn-success btn-sm">Create Outfits</Link>
         </div>
+        )}
       </Fragment>
     );
   }
 }
-Index.defaultProps = {
-  deletingId: null,
-};
 
 Index.propTypes = {
   fetchRecords: PropTypes.func.isRequired,
   deleteRecord: PropTypes.func.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  count: PropTypes.number.isRequired,
-  outfits: PropTypes.arrayOf(Object).isRequired,
-  deletingId: PropTypes.number,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  getItems: PropTypes.func.isRequired,
+  outfits: PropTypes.shape(Object).isRequired,
+  items: PropTypes.shape(Object).isRequired,
 };
 
-const mapStateToProps = store => store.outfits;
+const mapStateToProps = store => ({
+  outfits: store.outfits,
+  items: store.items,
+});
 
 const mapDispatchToProps = {
   fetchRecords: fetchOutfitsIfNeeded,
   deleteRecord: deleteOutfit,
+  getItems: fetchItemsIfNeeded,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

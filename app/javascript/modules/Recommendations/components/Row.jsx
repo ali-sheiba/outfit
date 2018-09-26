@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ItemRow from '../../Items/components/Row';
 
-const Row = ({ outfit }) => (
+const Row = ({ outfit: { items, ...outfit } }) => (
   <div className="card">
     <div className="card-body">
       <div className="float-md-right text-right">
@@ -17,7 +17,7 @@ const Row = ({ outfit }) => (
       </h5>
 
       <div className="flex-nowrap flex-row row row-cards o-auto">
-        {outfit.items.map(i => (
+        {items.map(i => (
           <ItemRow
             key={`outfit-item-${i.id}`}
             item={i}

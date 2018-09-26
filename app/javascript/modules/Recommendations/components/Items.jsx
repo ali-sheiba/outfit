@@ -50,9 +50,15 @@ const Items = ({
     <ContentDimmer active={fetching} error={error}>
       <span className="d-block mb-2">Select an Item to display suggestion</span>
       <div className="bg-blue-lightest p-4 border o-auto">
-        <div className="flex-nowrap flex-row row">
-          {items.map(i => itemRow(i))}
-        </div>
+        {items.length > 0 ? (
+          <div className="flex-nowrap flex-row row">
+            {items.map(i => itemRow(i))}
+          </div>
+        ) : (
+          <div className="text-center text-muted">
+          You dont have items, please add some.
+          </div>
+        ) }
       </div>
 
       {selectedItem && (
