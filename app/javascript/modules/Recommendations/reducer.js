@@ -3,7 +3,8 @@ import { errorMessage } from 'utils/errors';
 const initalState = {
   fetching: false,
   error: false,
-  recommendations: [],
+  outfits: [],
+  items: [],
   selectedItem: null,
 };
 
@@ -14,13 +15,15 @@ const reducer = (state = initalState, { type, payload }) => {
         ...state,
         fetching: true,
         error: false,
-        recommendations: [],
+        outfits: [],
+        items: [],
       };
     case 'FETCH_RECOMMENDATIONS_FULFILLED':
       return {
         ...state,
         fetching: false,
-        recommendations: payload.data.outfits,
+        outfits: payload.data.outfits,
+        items: payload.data.items,
       };
     case 'FETCH_RECOMMENDATIONS_REJECTED':
       return {
