@@ -53,6 +53,21 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
     ast (2.4.0)
+    aws-eventstream (1.0.1)
+    aws-partitions (1.104.0)
+    aws-sdk-core (3.28.0)
+      aws-eventstream (~> 1.0)
+      aws-partitions (~> 1.0)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.9.0)
+      aws-sdk-core (~> 3, >= 3.26.0)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.20.0)
+      aws-sdk-core (~> 3, >= 3.26.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
+    aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
     bootsnap (1.3.2)
       msgpack (~> 1.0)
@@ -114,6 +129,7 @@ GEM
       concurrent-ruby (~> 1.0)
     iniparse (1.4.4)
     jaro_winkler (1.5.1)
+    jmespath (1.4.0)
     jwt (2.1.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -293,6 +309,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_api
   annotate
+  aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.2.0)
   bullet

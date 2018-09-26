@@ -12,6 +12,7 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
 
 gem 'acts_as_api'
+gem 'aws-sdk-s3', require: false
 gem 'bcrypt', '~> 3.1.7'
 gem 'consul'
 gem 'devise'
