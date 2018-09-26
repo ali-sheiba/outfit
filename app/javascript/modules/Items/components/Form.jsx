@@ -62,6 +62,7 @@ const Form = ({
 
       <Field
         label="Image"
+        accept="image/*"
         name="item[image]"
         component={FileInput}
         validate={[required]}

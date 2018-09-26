@@ -25,6 +25,7 @@
     "localStorage": true,
     "sessionStorage": true,
     "window": true,
-    "document": true
+    "document": true,
+    "FileReader": true
   }
 }

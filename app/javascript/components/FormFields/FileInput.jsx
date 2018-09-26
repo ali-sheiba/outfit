@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FileBase64 from 'react-file-base64';
-
 import classNames from 'classnames';
+import FileBase64 from 'components/FileBase64';
+
 
 class FileInput extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class FileInput extends Component {
     } = this.props;
 
     return (
-      <Fragment>
+      <div className="custom-file">
         <FileBase64
           {...input}
           {...field}
@@ -31,6 +31,9 @@ class FileInput extends Component {
             'is-invalid': meta.touched && !meta.valid,
           })}
         />
+        <label className="custom-file-label">
+          {input.value ? input.value.name : 'Choose file'}
+        </label>
 
         {meta.touched && meta.error && (
         <div className="invalid-feedback">
@@ -43,7 +46,7 @@ class FileInput extends Component {
           {field.help}
         </div>
         )}
-      </Fragment>
+      </div>
     );
   }
 
