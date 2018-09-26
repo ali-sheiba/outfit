@@ -28,7 +28,7 @@ FactoryBot.define do
     first_name    { Faker::Name.first_name }
     last_name     { Faker::Name.last_name }
     email         { Faker::Internet.free_email(first_name) }
-    mobile        { rand(500_000_000..599_999_999) }
+    mobile        { "05#{Faker::Number.number(8)}" }
     date_of_birth { Faker::Date.between(18.years.ago, 40.years.ago) }
     password      { 'password' }
   end
