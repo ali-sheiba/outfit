@@ -1,0 +1,20 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # username: outfit_app
+  # password:
+  # host: localhost
+  # port: 5432
+  # schema_search_path: myapp,sharedapp,public
+  # min_messages: notice
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: outfit
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
