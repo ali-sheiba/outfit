@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { errorMessage } from 'utils/errors';
 
 const initalState = {
@@ -51,11 +53,11 @@ const reducer = (state = initalState, { type, payload, meta }) => {
         ...state,
         likingId: null,
         outfits: state.outfits.map((o) => {
-          let newO = Object.assign({}, o);
-          if (newO.id === payload.data.outfit.id) {
-            newO = Object.assign({}, payload.data.outfit);
+          if (o.id === payload.data.outfit.id) {
+            o.liked = payload.data.outfit.liked;
+            o.likes = payload.data.outfit.likes;
           }
-          return newO;
+          return o;
         }),
       };
     case 'LIKE_OUTFIT_REJECTED':
