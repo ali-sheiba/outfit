@@ -1,29 +1,34 @@
 # frozen_string_literal: true
 
 class Recommender
+  CHECK_KEYS = %i[brand color category].freeze
+
   attr_reader :item, :data, :user, :limit
 
   def initialize(item_id, user_id = nil, limit = 5)
     @item = Item.find(item_id)
     @user = User.find(user_id)
     @limit = limit
-    @data = all_outfits.as_api_response(:recommendations)
+    @data = build_outfits_hash
   end
 
   def perform
     data.map do |o|
+      # Add 1 point for each match of those keys
       o[:items].map do |i|
-        %i[brand color category].map { |var| i[:score] += 1 if send(var) == i[var] }
-        i[:score] += 3 if i[:score] == 3
+        CHECK_KEYS.map { |var| i[:score] += 1 if send(var) == i[var] }
       end
 
-      o[:score] = o[:items].pluck(:score).sum
+      # devide the score by the keys
+      o[:score] = o[:items].pluck(:score).sum / CHECK_KEYS.size
 
-      next if o[:score] < 1
+      # Add 1 point for outfits that been liked by the user
+      o[:score] += 1 if liked_outfits.include?(o[:id])
 
+      # Check Outfit popularity by likes ( outfit likes / total users )
       o[:score] += (o[:likes].to_f / users_count)
-      o[:score] += 2 if liked_outfits.include?(o[:id])
     end
+
     reorder_data
   end
 
@@ -37,6 +42,11 @@ class Recommender
   # return matched outfits objects
   def outfits
     Outfit.where(id: data.pluck(:id))
+  end
+
+  # retun item objects of matched ouffits
+  def items
+    Item.where(id: suggested_items.pluck(:id))
   end
 
   # This block is used for debugging and show the total score
@@ -56,18 +66,14 @@ class Recommender
     end
   end
 
-  # retun item objects of matched ouffits
-  def items
-    Item.where(id: matched_outfit_items.pluck(:id))
-  end
-
   private
 
   # Get items of matched outfits
-  # and select the lower 10 items on scores
-  def matched_outfit_items
+  # and select the lower 10 items on scores of other categories
+  def suggested_items
     data.pluck(:items)
         .flatten
+        .reject { |i| i[:category] == category }
         .sort_by { |i| i[:score] }[0..10]
   end
 
@@ -96,12 +102,32 @@ class Recommender
   # Fitch outfits that have any match of
   # - Category - Brand - Color - Liked by User
   def all_outfits
-    of = Outfit.includes(:outfit_items, :likes, items: %i[color brand category])
-    of.where(colors: { id: color })
-      .or(of.where(brands: { id: brand }))
-      .or(of.where(categories: { id: category }))
+    of = Outfit.includes(:likes, :items)
+    of.where(items: { color_id: color })
+      .or(of.where(items: { brand_id: brand }))
+      .or(of.where(items: { category_id: category }))
       .or(of.where(outfit_likes: { user_id: user.id }))
       .where.not(user_id: user.id)
       .distinct
+  end
+
+  # Convert outfits and items objects into hash with initial scores
+  def build_outfits_hash
+    all_outfits.map do |o|
+      {
+        id: o.id,
+        score: 0.0,
+        likes: o.likes_counter,
+        items: o.items.map do |i|
+          {
+            id: i.id,
+            brand: i.brand_id,
+            category: i.category_id,
+            color: i.color_id,
+            score: 0.0
+          }
+        end
+      }
+    end
   end
 end
