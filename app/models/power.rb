@@ -26,20 +26,21 @@ class Power
 
   power :items do
     current_user.items
-                .includes(:category, :brand, :color)
+                .with_associations
   end
 
   ######################## V1::OutfitsController #######################
 
   power :outfits do
     current_user.outfits
-                .includes(items: %i[category brand color])
+                .with_associations
   end
 
   ######################## V1::ExploresController #######################
 
   power :explores do
-    Outfit.includes(:user, items: %i[category brand color])
+    Outfit.includes(:user)
+          .with_associations
           .where.not(user_id: current_user.id)
   end
 

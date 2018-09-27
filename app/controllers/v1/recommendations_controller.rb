@@ -34,7 +34,8 @@ class V1::RecommendationsController < V1::BaseController
 
   def outfits
     @rec.outfits
-        .includes(:user, items: %i[category brand color])
+        .with_associations
+        .includes(:user)
         .as_api_response(:recommended, template_injector)
         .sort_by { |o| o[:score] }
         .reverse
@@ -42,7 +43,7 @@ class V1::RecommendationsController < V1::BaseController
 
   def items
     @rec.items
-        .includes(:category, :color, :brand)
+        .with_associations
         .as_api_response(:base, template_injector)
   end
 end

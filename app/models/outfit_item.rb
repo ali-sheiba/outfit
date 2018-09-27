@@ -39,10 +39,18 @@ class OutfitItem < ApplicationRecord
   validate :max_items_per_outfit
 
   ## --------------------- Callbacks ---------------------- ##
+
+  after_create_commit :update_outfit_total_price
+
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
 
   def max_items_per_outfit
     errors.add(:base, 'Max 6 items per outfit') if OutfitItem.where(outfit_id: outfit_id).count >= 6
+  end
+
+  def update_outfit_total_price
+    outfit.set_total_price
+    outfit.save
   end
 end

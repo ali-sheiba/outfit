@@ -41,6 +41,8 @@ class Item < ApplicationRecord
 
   default_scope { with_attached_image }
 
+  scope :with_associations, -> { includes(:color, :brand, :category) }
+
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   ## -------------------- Associations -------------------- ##

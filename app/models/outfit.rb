@@ -28,6 +28,9 @@ class Outfit < ApplicationRecord
   include OutfitPresenter
 
   ## ----------------------- Scopes ----------------------- ##
+
+  scope :with_associations, -> { includes(items: %i[color brand category]) }
+
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   ## -------------------- Associations -------------------- ##
