@@ -5,6 +5,11 @@ import {
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem,
 } from 'reactstrap';
 
+const toggleMenu = () => {
+  const menu = document.getElementById('headerMenuCollapse');
+  menu.classList.toggle('collapse');
+};
+
 const Header = ({ isLogin = false, profile = {} }) => (
   <div className="header py-4">
     <div className="container">
@@ -41,14 +46,14 @@ const Header = ({ isLogin = false, profile = {} }) => (
             </div>
           )}
 
-        {/* <a
-          href="#"
+        <button
           className="header-toggler d-lg-none ml-3 ml-lg-0"
           data-toggle="collapse"
           data-target="#headerMenuCollapse"
+          onClick={toggleMenu}
         >
           <span className="header-toggler-icon" />
-        </a> */}
+        </button>
 
       </div>
     </div>
