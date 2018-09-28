@@ -1,9 +1,11 @@
 import TextInput from './TextInput';
-import DropdownListInput from './DropdownListInput';
 import FileInput from './FileInput';
+import DropdownListInput from './DropdownListInput';
+import DatePickerInput from './DatePickerInput';
 
 export {
   TextInput,
   DropdownListInput,
   FileInput,
+  DatePickerInput,
 };

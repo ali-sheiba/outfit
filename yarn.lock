@@ -5667,6 +5667,10 @@ react-transition-group@^2.2.1, react-transition-group@^2.3.1, react-transition-g
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-widgets-moment@^4.0.21:
+  version "4.0.21"
+  resolved "https://registry.yarnpkg.com/react-widgets-moment/-/react-widgets-moment-4.0.21.tgz#f90e785c79b9d28121902ca14a0fa1a080221ab5"
+
 react-widgets@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-widgets/-/react-widgets-4.4.5.tgz#7e27a77a0b542bb8761b927de39e37ef5c46dc24"

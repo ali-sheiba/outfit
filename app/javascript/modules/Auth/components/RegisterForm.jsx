@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
-import TextInput from 'components/FormFields/TextInput';
+import { TextInput, DatePickerInput } from 'components/FormFields';
 import { required, email, mobile } from 'components/FormFields/Validations';
 
 const Form = ({ error, handleSubmit, submitting }) => (
@@ -51,7 +51,7 @@ const Form = ({ error, handleSubmit, submitting }) => (
         type="date"
         tabIndex="4"
         name="user[date_of_birth]"
-        component={TextInput}
+        component={DatePickerInput}
         validate={[required]}
       />
 
