@@ -14,13 +14,13 @@ class Recommender
 
   def perform
     data.map do |o|
-      # Add 1 point for each match of those keys
       o[:items].map do |i|
+        # Add 1 point for each match of the main keys
         CHECK_KEYS.map { |var| i[:score] += 1 if send(var) == i[var] }
       end
 
-      # devide the score by the keys
-      o[:score] = o[:items].pluck(:score).sum / CHECK_KEYS.size
+      # Outfit score = sum of all items points
+      o[:score] += o[:items].pluck(:score).sum
 
       # Add 1 point for outfits that been liked by the user
       o[:score] += 1 if liked_outfits.include?(o[:id])
