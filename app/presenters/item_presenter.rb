@@ -19,13 +19,5 @@ module ItemPresenter
     api_accessible :index, extend: :base
 
     api_accessible :show, extend: :index
-
-    api_accessible :recommendations do |t|
-      t.add :id
-      t.add :brand_id,    as: :brand
-      t.add :color_id,    as: :color
-      t.add :category_id, as: :category
-      t.add ->(_) { 0.0 }, as: :score
-    end
   end
 end

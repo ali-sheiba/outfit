@@ -30,13 +30,6 @@ module OutfitPresenter
       t.add ->(outfit, options) { options[:liked_outfit_ids].include?(outfit.id) }, as: :liked
     end
 
-    api_accessible :recommendations do |t|
-      t.add :id
-      t.add :items, template: :recommendations
-      t.add :likes_counter, as: :likes
-      t.add ->(_) { 0.0 }, as: :score
-    end
-
     api_accessible :recommended, extend: :explore do |t|
       t.add ->(outfit, options) { options[:scores].find { |i| i[:id] == outfit.id }[:score] }, as: :score
     end
