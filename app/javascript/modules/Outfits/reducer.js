@@ -85,6 +85,10 @@ const reducer = (state = initalState, { type, payload, meta }) => {
         count: state.count - 1,
         deletingId: null,
       };
+    case 'LOGIN_FULFILLED':
+    case 'REGISTER_FULFILLED':
+    case 'LOGOUT_FULFILLED':
+      return initalState;
     default:
       return state;
   }

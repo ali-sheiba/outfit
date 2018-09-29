@@ -65,6 +65,10 @@ const reducer = (state = initalState, { type, payload, meta }) => {
         ...state,
         likingId: null,
       };
+    case 'LOGIN_FULFILLED':
+    case 'REGISTER_FULFILLED':
+    case 'LOGOUT_FULFILLED':
+      return initalState;
     default:
       return state;
   }
