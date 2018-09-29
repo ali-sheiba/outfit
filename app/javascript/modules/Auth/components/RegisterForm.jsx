@@ -2,8 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import LoadingButton from 'components/LoadingButton';
 import { TextInput, DatePickerInput } from 'components/FormFields';
 import { required, email, mobile } from 'components/FormFields/Validations';
 
@@ -83,7 +83,13 @@ const Form = ({ error, handleSubmit, submitting }) => (
       )}
 
       <div className="form-footer">
-        <Button color="primary" tabIndex="7" block disabled={submitting}>Regsiter</Button>
+        <LoadingButton
+          className="btn btn-primary btn-block"
+          tabIndex="7"
+          loading={submitting}
+        >
+          Register
+        </LoadingButton>
       </div>
 
     </div>

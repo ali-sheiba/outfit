@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
+import LoadingButton from 'components/LoadingButton';
 import { DropdownListInput, TextInput, FileInput } from 'components/FormFields';
 import { required, number } from 'components/FormFields/Validations';
 
@@ -77,7 +77,12 @@ const Form = ({
     )}
 
     <div className="card-footer text-center">
-      <Button color="primary" disabled={submitting}>Submit</Button>
+      <LoadingButton
+        className="btn btn-primary w-9"
+        loading={submitting}
+      >
+        Submit
+      </LoadingButton>
     </div>
   </form>
 );

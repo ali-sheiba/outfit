@@ -2,9 +2,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
 import { Field, reduxForm } from 'redux-form';
 import TextInput from 'components/FormFields/TextInput';
+import LoadingButton from 'components/LoadingButton';
 import { required, email } from 'components/FormFields/Validations';
 
 const Form = ({ error, handleSubmit, submitting }) => (
@@ -53,7 +53,13 @@ const Form = ({ error, handleSubmit, submitting }) => (
       )}
 
       <div className="form-footer">
-        <Button color="primary" tabIndex="3" block disabled={submitting}>Login</Button>
+        <LoadingButton
+          className="btn btn-primary btn-block"
+          tabIndex="3"
+          loading={submitting}
+        >
+          Login
+        </LoadingButton>
       </div>
 
     </div>
